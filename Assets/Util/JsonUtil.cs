@@ -8,7 +8,7 @@ using System.IO;
 using UnityEngine;
 
 
-internal class JsonUtil
+public static class JsonUtil
 {
     public static string FilePath {  get; private set; }
     

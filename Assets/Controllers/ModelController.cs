@@ -1,59 +1,63 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Dummiesman;
 using UnityEngine.VFX;
 using System.IO;
 using System.Xml.Linq;
+using System;
+using Newtonsoft.Json;
 
 public class ModelController : MonoBehaviour
 {
-    public GameObject plane;
-    public Material material;
+    private Model model;
+    private List<Flag> flagList;
 
     void Start()
     {
-        string objPath = "C:\\Temp\\Models\\vase\\vase.obj";
-        string mtlPath = "C:\\Temp\\Models\\vase\\vase.mtl";
-        GameObject loadedObj = LoadModelOBJLoader(objPath,mtlPath);
-
-        //AssignMaterialToObj(loadedObj);
-        SnapToPlane(loadedObj);
+        
     }
 
-    void SnapToPlane(GameObject obj)
+    public void InitializeModel(string modelName)
     {
-        Renderer objRenderer = obj.GetComponentInChildren<Renderer>();
-        if (objRenderer != null)
+        if (ModelExists(modelName))
         {
-            float objBottomY = objRenderer.bounds.min.y;
-
-            Vector3 planePosition = plane.transform.position;
-            obj.transform.position = new Vector3(planePosition.x, planePosition.y - objBottomY, planePosition.z);
+            model = JsonUtil.Deserialize<Model>(modelName);
+            flagList = model.Flags;
         }
         else
         {
-            Debug.LogError("No Renderer found on the loaded object or its children.");
+            flagList = new List<Flag>();
+            model = new Model(Guid.NewGuid(), modelName, flagList);
+            JsonUtil.Serialize(model, modelName);
         }
     }
 
-    void AssignMaterialToObj(GameObject obj)
+    private bool ModelExists(string modelName)
     {
-        Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
-        foreach (var renderer in renderers)
+        string filePath = Path.Combine(Application.dataPath, "Json/" + modelName);
+        if (File.Exists(filePath))
         {
-            Material[] newMaterials = new Material[renderer.materials.Length];
-            for (int i = 0; i < newMaterials.Length; i++)
-            {
-                newMaterials[i] = material;
-            }
-            renderer.materials = newMaterials;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
-    GameObject LoadModelOBJLoader(string filePath, string mtlPath)
+    public void AddFlagToModel(string subject, string dueDate, string assignedTo, string description, Vector3 spawnPosition, string modelName)
     {
-        OBJLoader loader = new OBJLoader();
-        return loader.Load(filePath, mtlPath);
+        Flag flag = new Flag(Guid.NewGuid(), spawnPosition, subject, dueDate, assignedTo, description);
+        if (flagList != null)
+        {
+            flagList.Add(flag);
+        }
+        JsonUtil.Serialize(model, modelName);
+    }
+
+    public Model GetModel()
+    {
+        return model;
     }
 }

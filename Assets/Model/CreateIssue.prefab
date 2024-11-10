@@ -804,7 +804,7 @@ GameObject:
   - component: {fileID: 6238854553198852351}
   - component: {fileID: 5581515156283035101}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: CancelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1107,7 +1107,7 @@ GameObject:
   - component: {fileID: 3335001869628540799}
   - component: {fileID: 8993754838542988876}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: SubjectInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1283,7 +1283,7 @@ GameObject:
   - component: {fileID: 7747078475994826731}
   - component: {fileID: 5477406464490791461}
   m_Layer: 5
-  m_Name: InputField (TMP) (2)
+  m_Name: DueDateInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1593,7 +1593,7 @@ GameObject:
   - component: {fileID: 460702297758024296}
   - component: {fileID: 3210099361787532736}
   m_Layer: 5
-  m_Name: Dropdown
+  m_Name: AssignedToDropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1989,7 +1989,7 @@ GameObject:
   - component: {fileID: 4434624381280463882}
   - component: {fileID: 6223841533605973625}
   m_Layer: 5
-  m_Name: Button
+  m_Name: CreateIssueButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3239,8 +3239,8 @@ RectTransform:
   - {fileID: 1425763173883765535}
   - {fileID: 8519422906861062022}
   - {fileID: 4298641868650896180}
-  - {fileID: 1466894768492131306}
   - {fileID: 7649529039190397425}
+  - {fileID: 1466894768492131306}
   m_Father: {fileID: 6360834694623112242}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3801,7 +3801,7 @@ GameObject:
   - component: {fileID: 7394218418344796195}
   - component: {fileID: 1165949599364905714}
   m_Layer: 5
-  m_Name: InputField (TMP) (1)
+  m_Name: DescriptionInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

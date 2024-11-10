@@ -2,7 +2,7 @@
 using System;
 
 
-internal class Flag
+public class Flag
 {
     public Guid FlagId { get; }
     public Vector3 Location {  get; }

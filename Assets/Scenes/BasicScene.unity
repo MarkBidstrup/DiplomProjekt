@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 52451221}
   - component: {fileID: 52451220}
+  - component: {fileID: 52451222}
   m_Layer: 0
   m_Name: ModelController
   m_TagString: Untagged
@@ -151,8 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c922341df71e87e4ca5a82d502608e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plane: {fileID: 1249617917}
-  material: {fileID: 2100000, guid: 500a3d80cb8dadf4797d7c3a1c9d2fc8, type: 2}
 --- !u!4 &52451221
 Transform:
   m_ObjectHideFlags: 0
@@ -168,6 +167,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &52451222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52451219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eca2c54792508124cbf8575c2b2c50f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flagPrefab: {fileID: 7049068575926722093, guid: c3b8f907c4289c0458a42cc277ee8ef6, type: 3}
+  spawnDistance: 2
 --- !u!1001 &159193336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -222,7 +235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c3e780a9de1b2ac4090324191ca7a728, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -258,7 +271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565e2dfe0b8e76e469ec71ddece4cda0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activationThreshold: 0.1
 --- !u!4 &252097974
 Transform:
   m_ObjectHideFlags: 0
@@ -632,8 +644,9 @@ GameObject:
   - component: {fileID: 1058976839}
   - component: {fileID: 1058976838}
   - component: {fileID: 1058976840}
+  - component: {fileID: 1058976841}
   m_Layer: 0
-  m_Name: MenuController
+  m_Name: GUIController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -653,6 +666,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 7783865097070107226, guid: 3e33875c16f03f84e88216fe574039ce, type: 3}
   createIssue: {fileID: 7783865097070107226, guid: 94fdd6396d831034c80c3e624944f061, type: 3}
+  selectModel: {fileID: 7783865097070107226, guid: f87bbe1f53454444ab87aa5d5e25cff7, type: 3}
+  flagPrefab: {fileID: 7049068575926722093, guid: c3b8f907c4289c0458a42cc277ee8ef6, type: 3}
+  plane: {fileID: 1249617917}
+  material: {fileID: 2100000, guid: 500a3d80cb8dadf4797d7c3a1c9d2fc8, type: 2}
   cameraTransform: {fileID: 1150629025}
   inputHandler: {fileID: 252097973}
 --- !u!4 &1058976839
@@ -683,8 +700,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flagPrefab: {fileID: 7049068575926722093, guid: c3b8f907c4289c0458a42cc277ee8ef6, type: 3}
-  player: {fileID: 0}
   spawnDistance: 2
+--- !u!114 &1058976841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058976837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c922341df71e87e4ca5a82d502608e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1150629025 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1767192434, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
@@ -956,7 +984,7 @@ SceneRoots:
   - {fileID: 1249617921}
   - {fileID: 450975771}
   - {fileID: 1637331747}
-  - {fileID: 52451221}
   - {fileID: 159193336}
   - {fileID: 1058976839}
   - {fileID: 252097974}
+  - {fileID: 52451221}

@@ -1,0 +1,27 @@
+{
+  "ModelId": "f54fb426-eac8-4b45-9c06-8139d2e44047",
+  "ModelName": "FællesmodelTilMark_v2",
+  "Flags": [
+    {
+      "FlagId": "7eab9570-5431-411c-8ab6-09e22dc0f80a",
+      "Location": {
+        "x": -3.57240152,
+        "y": 1.22772253,
+        "z": -2.47588015,
+        "normalized": {
+          "x": -0.790955842,
+          "y": 0.271826744,
+          "z": -0.548178,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 4.51656246,
+        "sqrMagnitude": 20.3993378
+      },
+      "Subject": "",
+      "DueDate": "",
+      "AssignedTo": "Afvanding / Drainage",
+      "Description": ""
+    }
+  ]
+}
