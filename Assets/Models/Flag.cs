@@ -2,6 +2,7 @@
 using System;
 
 
+// Holds flag data.
 public class Flag
 {
     public Guid FlagId { get; }

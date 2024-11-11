@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+
+// EventHandler used by the main menu UI.
 public class MainMenuEventHandler : MonoBehaviour
 {
     public event Action createIssueButtonPressed;

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.XR;
 
 
+// Handles controller input.
 public class InputHandler : MonoBehaviour
 {
     public event Action OnMenuButtonPressed;
@@ -13,7 +14,7 @@ public class InputHandler : MonoBehaviour
 
     void Update()
     {
-        // Check for left menu button press
+        // Check for left menu button press.
         if (!leftHandDevice.isValid)
         {
             leftHandDevice = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
@@ -28,7 +29,7 @@ public class InputHandler : MonoBehaviour
             menuButtonWasPressed = menuButtonPressed;
         }
 
-        // Check for right primary button press
+        // Check for right controller primary button press.
         if (!rightHandDevice.isValid)
         {
             rightHandDevice = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);

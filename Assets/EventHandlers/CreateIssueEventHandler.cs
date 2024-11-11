@@ -1,13 +1,19 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.Rendering.UI;
 
+
+// EventHandler used by the create issue UI.
 public class CreateIssueEventHandler : MonoBehaviour
 {
-    public TMP_InputField subject;
-    public TMP_InputField dueDate;
-    public TMP_Dropdown assignedTo;
-    public TMP_InputField description;
+    // Referenced in the unity prefab editor inspector
+    [SerializeField]
+    private TMP_InputField subject;
+    [SerializeField]
+    private TMP_InputField dueDate;
+    [SerializeField]
+    private TMP_Dropdown assignedTo;
+    [SerializeField]
+    private TMP_InputField description;
 
     public delegate void OnCreateIssueDelegate(string subject, string dueDate, string assignedTo, string description);
 

@@ -1,23 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using Dummiesman;
-using UnityEngine.VFX;
 using System.IO;
-using System.Xml.Linq;
 using System;
-using Newtonsoft.Json;
 
+
+// Class is used to control model.
 public class ModelController : MonoBehaviour
 {
     private Model model;
     private List<Flag> flagList;
 
-    void Start()
-    {
-        
-    }
-
+    // Initializes model.
     public void InitializeModel(string modelName)
     {
         if (ModelExists(modelName))
@@ -33,6 +26,24 @@ public class ModelController : MonoBehaviour
         }
     }
 
+    // Adds a flag to the model and serializes model data.
+    public void AddFlagToModel(string subject, string dueDate, string assignedTo, string description, Vector3 spawnPosition, string modelName)
+    {
+        Flag flag = new Flag(Guid.NewGuid(), spawnPosition, subject, dueDate, assignedTo, description);
+        if (flagList != null)
+        {
+            flagList.Add(flag);
+        }
+        JsonUtil.Serialize(model, modelName);
+    }
+
+    // Returns model.
+    public Model GetModel()
+    {
+        return model;
+    }
+
+    // Checks if the model exists in the file path.
     private bool ModelExists(string modelName)
     {
         string filePath = Path.Combine(Application.dataPath, "Json/" + modelName);
@@ -44,20 +55,5 @@ public class ModelController : MonoBehaviour
         {
             return false;
         }
-    }
-
-    public void AddFlagToModel(string subject, string dueDate, string assignedTo, string description, Vector3 spawnPosition, string modelName)
-    {
-        Flag flag = new Flag(Guid.NewGuid(), spawnPosition, subject, dueDate, assignedTo, description);
-        if (flagList != null)
-        {
-            flagList.Add(flag);
-        }
-        JsonUtil.Serialize(model, modelName);
-    }
-
-    public Model GetModel()
-    {
-        return model;
     }
 }

@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
+// EventHandler used by the select model UI.
 public class SelectModelEventHandler : MonoBehaviour
 {
-    public TMP_Dropdown selectedModel;
+    // Referenced in the unity prefab editor inspector
+    [SerializeField]
+    private TMP_Dropdown selectedModel;
 
     public delegate void OnSelectModelDelegate(string selectedModel);
 

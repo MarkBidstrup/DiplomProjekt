@@ -1,27 +1,97 @@
 {
-  "ModelId": "6c2c6f16-c639-4320-ae50-571e7b425d04",
+  "ModelId": "4dabb810-3316-4751-b95f-d01c12d5ab55",
   "ModelName": "FællesmodelTilMark",
   "Flags": [
     {
-      "FlagId": "73fc5172-4980-4faa-baa8-4f80594ed12d",
+      "FlagId": "0f15ab3c-ff81-46c0-9b25-5f848dce7f2e",
       "Location": {
-        "x": 0.43854633,
-        "y": 1.23128033,
-        "z": 3.41606522,
+        "x": 0.194681957,
+        "y": 1.14855933,
+        "z": 3.34887242,
         "normalized": {
-          "x": 0.119900756,
-          "y": 0.336638182,
-          "z": 0.933969259,
+          "x": 0.05490639,
+          "y": 0.323929578,
+          "z": 0.944486558,
           "magnitude": 1.0,
-          "sqrMagnitude": 1.0
+          "sqrMagnitude": 0.99999994
         },
-        "magnitude": 3.65757775,
-        "sqrMagnitude": 13.3778753
+        "magnitude": 3.54570675,
+        "sqrMagnitude": 12.5720358
       },
       "Subject": "",
       "DueDate": "",
       "AssignedTo": "Afvanding / Drainage",
       "Description": ""
+    },
+    {
+      "FlagId": "fdbdb5b3-a5ea-4a05-bfca-94b1c4899756",
+      "Location": {
+        "x": -2.512064,
+        "y": 1.24770355,
+        "z": 4.6363287,
+        "normalized": {
+          "x": -0.46358797,
+          "y": 0.230257019,
+          "z": 0.855609655,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 5.41874266,
+        "sqrMagnitude": 29.3627739
+      },
+      "Subject": "",
+      "DueDate": "",
+      "AssignedTo": "Afvanding / Drainage",
+      "Description": ""
+    },
+    {
+      "FlagId": "0a05b845-4167-4988-9aa5-3ffbd1859703",
+      "Location": {
+        "x": 3.287656,
+        "y": 1.29368043,
+        "z": 5.64426374,
+        "normalized": {
+          "x": 0.493728846,
+          "y": 0.19428046,
+          "z": 0.847636044,
+          "normalized": {
+            "x": 0.493728876,
+            "y": 0.194280475,
+            "z": 0.8476361,
+            "magnitude": 1.0,
+            "sqrMagnitude": 1.00000012
+          },
+          "magnitude": 0.99999994,
+          "sqrMagnitude": 0.99999994
+        },
+        "magnitude": 6.658829,
+        "sqrMagnitude": 44.340004
+      },
+      "Subject": "",
+      "DueDate": "",
+      "AssignedTo": "Afvanding / Drainage",
+      "Description": ""
+    },
+    {
+      "FlagId": "1ed13e2a-12b7-4865-99fb-140572c81dbb",
+      "Location": {
+        "x": 6.9893074,
+        "y": 1.2375257,
+        "z": -2.04659486,
+        "normalized": {
+          "x": 0.946140051,
+          "y": 0.167523414,
+          "z": -0.2770468,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 7.387181,
+        "sqrMagnitude": 54.57044
+      },
+      "Subject": "test",
+      "DueDate": "ttt",
+      "AssignedTo": "Fremmede ledninger / Utilities",
+      "Description": "teeeest"
     }
   ]
 }

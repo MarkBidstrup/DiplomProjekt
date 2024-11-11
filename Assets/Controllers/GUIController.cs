@@ -1,29 +1,43 @@
 ﻿using Dummiesman;
-using System;
 using UnityEngine;
 
-
+// Responsible for controlling graphical elements and events from UI.
 public class GUIController : MonoBehaviour
 {
-    public GameObject mainMenu;
-    public GameObject createIssue;
-    public GameObject selectModel;
-    public GameObject flagPrefab;
-    public GameObject plane;
-    public Material material;
-    public Transform cameraTransform;
-    public InputHandler inputHandler;
-    private float spawnDistance = 4f;
+    // Referenced in the unity editor inspector
+    [SerializeField]
+    private GameObject mainMenuPrefab;
+    [SerializeField]
+    private GameObject createIssuePrefab;
+    [SerializeField]
+    private GameObject selectModelPrefab;
+    [SerializeField]
+    private GameObject flagPrefab;
+    [SerializeField]
+    private GameObject plane;
+    [SerializeField]
+    private Material material;
+    [SerializeField]
+    private Transform cameraTransform;
+    [SerializeField]
+    private InputHandler inputHandler;
+
+    // current 3D objects
     private GameObject currentMainMenu;
     private GameObject currentCreateIssue;
     private GameObject currentSelectModel;
     private GameObject currentModel;
+
+    // Event handlers
     private MainMenuEventHandler mainMenuEventHandler;
     private CreateIssueEventHandler createIssueEventHandler;
     private SelectModelEventHandler selectModelEventHandler;
+
     private ModelController modelController;
+    private float spawnDistance = 4f;
     private string currentModelName;
 
+    // Called when the scene initializes.
     private void Start()
     {
         modelController = GetComponent<ModelController>();
@@ -32,17 +46,18 @@ public class GUIController : MonoBehaviour
             inputHandler.OnMenuButtonPressed += ToggleMenu;
         }
 
-        if (mainMenu != null)
+        if (mainMenuPrefab != null)
         {
-            mainMenu.SetActive(false);
+            mainMenuPrefab.SetActive(false);
         }
     }
 
+    // Toggles the main menu UI and subscribes/unsubscribes to menu events.
     private void ToggleMenu()
     {
         if (currentMainMenu == null)
         {
-            SpawnUI(mainMenu);
+            SpawnUI(mainMenuPrefab);
             currentMainMenu.SetActive(true);
             mainMenuEventHandler = currentMainMenu.GetComponentInChildren<MainMenuEventHandler>();
 
@@ -66,35 +81,37 @@ public class GUIController : MonoBehaviour
         }
     }
 
+    // Spawns UI object in the scene.
     private void SpawnUI(GameObject UIPrefab)
     {
         Vector3 spawnPosition = cameraTransform.position + cameraTransform.forward * spawnDistance;
 
-        if (UIPrefab == mainMenu)
+        if (UIPrefab == mainMenuPrefab)
         {
-            currentMainMenu = Instantiate(mainMenu, spawnPosition, Quaternion.identity);
+            currentMainMenu = Instantiate(mainMenuPrefab, spawnPosition, Quaternion.identity);
             currentMainMenu.transform.LookAt(cameraTransform);
             currentMainMenu.transform.rotation = Quaternion.LookRotation(currentMainMenu.transform.position - cameraTransform.position);
         }
-        else if (UIPrefab == createIssue)
+        else if (UIPrefab == createIssuePrefab)
         {
-            currentCreateIssue = Instantiate(createIssue, spawnPosition, Quaternion.identity);
+            currentCreateIssue = Instantiate(createIssuePrefab, spawnPosition, Quaternion.identity);
             currentCreateIssue.transform.LookAt(cameraTransform);
             currentCreateIssue.transform.rotation = Quaternion.LookRotation(currentCreateIssue.transform.position - cameraTransform.position);
         }
-        else if (UIPrefab == selectModel)
+        else if (UIPrefab == selectModelPrefab)
         {
-            currentSelectModel = Instantiate(selectModel, spawnPosition, Quaternion.identity);
+            currentSelectModel = Instantiate(selectModelPrefab, spawnPosition, Quaternion.identity);
             currentSelectModel.transform.LookAt(cameraTransform);
             currentSelectModel.transform.rotation = Quaternion.LookRotation(currentSelectModel.transform.position - cameraTransform.position);
         }
         UIPrefab.SetActive(true);
     }
 
+    // Runs when create issue button is pressed in the main menu UI.
     private void OnCreateIssueButtonPress()
     {
         Destroy(currentMainMenu);
-        SpawnUI(createIssue);
+        SpawnUI(createIssuePrefab);
 
         createIssueEventHandler = currentCreateIssue.GetComponentInChildren<CreateIssueEventHandler>();
 
@@ -104,16 +121,11 @@ public class GUIController : MonoBehaviour
         }
     }
 
-    private void CreateIssue(string subject, string dueDate, string assignedTo, string description)
-    {
-        SpawnFlag(subject, dueDate, assignedTo, description);
-        Destroy(currentCreateIssue);
-    }
-
+    // Runs when create issue button is pressed in the main menu UI.
     private void OnSelectModelButtonPress()
     {
         Destroy(currentMainMenu);
-        SpawnUI(selectModel);
+        SpawnUI(selectModelPrefab);
         selectModelEventHandler = currentSelectModel.GetComponentInChildren<SelectModelEventHandler>();
         if (selectModelEventHandler != null)
         {
@@ -121,6 +133,14 @@ public class GUIController : MonoBehaviour
         }
     }
 
+    // Runs when the create issue button is pressed in the create issue UI.
+    private void CreateIssue(string subject, string dueDate, string assignedTo, string description)
+    {
+        SpawnFlag(subject, dueDate, assignedTo, description);
+        Destroy(currentCreateIssue);
+    }
+
+    // Spawns a 3D flag object in the scene and adds a flag to the model.
     private void SpawnFlag(string subject, string dueDate, string assignedTo, string description)
     {
         if (flagPrefab != null && currentModelName != null)
@@ -132,6 +152,10 @@ public class GUIController : MonoBehaviour
         }
     }
 
+    // Runs when select button is pressed in the select model UI.
+    // Destroys all flags in the scene.
+    // Imports model in runtime with OBJLoader.
+    // Instantiates flags in the loaded model to the scene.
     private void LoadModel(string modelName)
     {
         if (modelName == null)
@@ -159,7 +183,8 @@ public class GUIController : MonoBehaviour
         InstantiateFlags();
     }
 
-    void SnapToPlane(GameObject obj)
+    // Moves the model down to the plane in the scene.
+    private void SnapToPlane(GameObject obj)
     {
         Renderer objRenderer = obj.GetComponentInChildren<Renderer>();
         if (objRenderer != null)
@@ -175,7 +200,8 @@ public class GUIController : MonoBehaviour
         }
     }
 
-    void AssignMaterialToObj(GameObject obj)
+    // Assigns one material to the 3D model.
+    private void AssignMaterialToObj(GameObject obj)
     {
         Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
         foreach (var renderer in renderers)
@@ -189,6 +215,7 @@ public class GUIController : MonoBehaviour
         }
     }
 
+    // Destroys all flags in the scene.
     private void DestroyFlags()
     {
         GameObject[] flags = GameObject.FindGameObjectsWithTag("Flag");
@@ -198,6 +225,7 @@ public class GUIController : MonoBehaviour
         }
     }
 
+    // Instantiates flags from the model in the scene.
     private void InstantiateFlags()
     {
         foreach (var flag in modelController.GetModel().Flags)

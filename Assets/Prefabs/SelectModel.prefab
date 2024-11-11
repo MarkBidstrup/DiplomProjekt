@@ -2052,7 +2052,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &495608621419655057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2101,9 +2101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8527a44118196c64e82cafaf031b38de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenu: {fileID: 0}
-  createIssue: {fileID: 0}
-  selectModel: {fileID: 0}
+  mainMenuPrefab: {fileID: 0}
+  createIssuePrefab: {fileID: 0}
+  selectModelPrefab: {fileID: 0}
   flagPrefab: {fileID: 0}
   plane: {fileID: 0}
   material: {fileID: 0}
