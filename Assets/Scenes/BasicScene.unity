@@ -609,7 +609,6 @@ MonoBehaviour:
   selectModelPrefab: {fileID: 7783865097070107226, guid: f87bbe1f53454444ab87aa5d5e25cff7, type: 3}
   flagPrefab: {fileID: 7049068575926722093, guid: c3b8f907c4289c0458a42cc277ee8ef6, type: 3}
   plane: {fileID: 1249617917}
-  material: {fileID: 2100000, guid: 500a3d80cb8dadf4797d7c3a1c9d2fc8, type: 2}
   cameraTransform: {fileID: 1150629025}
   inputHandler: {fileID: 252097973}
 --- !u!4 &1058976839

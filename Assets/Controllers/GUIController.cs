@@ -16,8 +16,6 @@ public class GUIController : MonoBehaviour
     [SerializeField]
     private GameObject plane;
     [SerializeField]
-    private Material material;
-    [SerializeField]
     private Transform cameraTransform;
     [SerializeField]
     private InputHandler inputHandler;
@@ -177,7 +175,7 @@ public class GUIController : MonoBehaviour
         string mtlPath = $"C:\\Temp\\Models\\{modelName}.mtl";
         OBJLoader loader = new OBJLoader();
         currentModel = loader.Load(objPath, mtlPath);
-        AssignMaterialToObj(currentModel);
+        AssignColorToMaterialInModel(currentModel);
         SnapToPlane(currentModel);
         modelController.InitializeModel(modelName);
         InstantiateFlags();
@@ -200,18 +198,19 @@ public class GUIController : MonoBehaviour
         }
     }
 
-    // Assigns one material to the 3D model.
-    private void AssignMaterialToObj(GameObject obj)
+    // Assigns material base color to the 3D models materials.
+    private void AssignColorToMaterialInModel(GameObject obj)
     {
         Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
         foreach (var renderer in renderers)
         {
-            Material[] newMaterials = new Material[renderer.materials.Length];
-            for (int i = 0; i < newMaterials.Length; i++)
+            for (int i = 0;i < renderer.materials.Length;i++)
             {
-                newMaterials[i] = material;
+                Material material = renderer.materials[i];
+                Color currentColor = material.color; // get the color before changing shader.
+                material.shader = Shader.Find("Universal Render Pipeline/Lit"); // Project pipeline does not support Standard (Specular setup) shader.
+                material.SetColor("_BaseColor", currentColor);
             }
-            renderer.materials = newMaterials;
         }
     }
 
