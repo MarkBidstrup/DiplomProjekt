@@ -1141,7 +1141,7 @@ GameObject:
   - component: {fileID: 7596414118071267929}
   - component: {fileID: 5482338865734966241}
   m_Layer: 5
-  m_Name: CancelButton
+  m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1248,7 +1248,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7596414118071267929}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3749695099218795037}
+        m_TargetAssemblyTypeName: SelectModelEventHandler, Assembly-CSharp
+        m_MethodName: OnCloseButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6356415033087860271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,7 +1622,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cancel
+  m_text: Close
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1888,6 +1900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc542733f98c7e543959e4443a282b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 7783865097070107226}
   selectedModel: {fileID: 693193260318499772}
 --- !u!1 &7624554087542763475
 GameObject:
@@ -2052,7 +2065,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &495608621419655057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2104,9 +2117,9 @@ MonoBehaviour:
   mainMenuPrefab: {fileID: 0}
   createIssuePrefab: {fileID: 0}
   selectModelPrefab: {fileID: 0}
+  viewIssuesPrefab: {fileID: 0}
   flagPrefab: {fileID: 0}
   plane: {fileID: 0}
-  material: {fileID: 0}
   cameraTransform: {fileID: 0}
   inputHandler: {fileID: 0}
 --- !u!1 &8751939213379416137
@@ -2120,7 +2133,7 @@ GameObject:
   - component: {fileID: 1164082375828356603}
   - component: {fileID: 2335069235989515315}
   m_Layer: 0
-  m_Name: DropdownOptions
+  m_Name: SelectModelManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

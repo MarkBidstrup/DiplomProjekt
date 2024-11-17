@@ -501,7 +501,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cancel
+  m_text: Close
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -791,6 +791,51 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!1 &2784941523825468158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 28776850036317685}
+  - component: {fileID: 975681788009882924}
+  m_Layer: 0
+  m_Name: CreateIssueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &28776850036317685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2784941523825468158}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2066.6667, y: 2183.3335, z: 0}
+  m_LocalScale: {x: 33.333336, y: 33.333336, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6360834694623112242}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &975681788009882924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2784941523825468158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541690d675ced5047a4132c980e9da15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdown: {fileID: 3210099361787532736}
 --- !u!1 &2908514861216436905
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,7 +849,7 @@ GameObject:
   - component: {fileID: 6238854553198852351}
   - component: {fileID: 5581515156283035101}
   m_Layer: 5
-  m_Name: CancelButton
+  m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -912,9 +957,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FlagInputHandler, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 8081238693588539925}
+        m_TargetAssemblyTypeName: CreateIssueEventHandler, Assembly-CSharp
+        m_MethodName: OnCloseButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1709,39 +1754,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Afvanding / Drainage
-      m_Image: {fileID: 0}
-    - m_Text: "Arbejdsmilj\xF8 / Working environment"
-      m_Image: {fileID: 0}
-    - m_Text: "Banetrac\xE9 og spor/ Tracks"
-      m_Image: {fileID: 0}
-    - m_Text: BIM/IKT / BIM/ICT
-      m_Image: {fileID: 0}
-    - m_Text: Broer og konstruktioner / Bridges and Structures
-      m_Image: {fileID: 0}
-    - m_Text: "F\xF8ringsveje / Cable Ducting"
-      m_Image: {fileID: 0}
-    - m_Text: Fremmede ledninger / Utilities
-      m_Image: {fileID: 0}
-    - m_Text: Geoteknik /  Geotechnics
-      m_Image: {fileID: 0}
-    - m_Text: "Jord, landskab og anl\xE6gshistorik / Earthing and BPU"
-      m_Image: {fileID: 0}
-    - m_Text: "K\xF8restr\xF8m / Catenary Design"
-      m_Image: {fileID: 0}
-    - m_Text: "Natur og milj\xF8 / Environment"
-      m_Image: {fileID: 0}
-    - m_Text: Projektledelse / Project management
-      m_Image: {fileID: 0}
-    - m_Text: Sikringsteknik projektering / Signal
-      m_Image: {fileID: 0}
-    - m_Text: "St\xE6rkstr\xF8m / Power Supply"
-      m_Image: {fileID: 0}
-    - m_Text: "Tv\xE6rg\xE5ende / Cross disciplinary"
-      m_Image: {fileID: 0}
-    - m_Text: Vejdesign og -teknik / Road design and -equipment
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2174,7 +2187,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Afvanding / Drainage
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2703,6 +2716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fddaddd75428cc844a5b00285b01bc6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 7783865097070107226}
   subject: {fileID: 8993754838542988876}
   dueDate: {fileID: 5477406464490791461}
   assignedTo: {fileID: 3210099361787532736}
@@ -3699,6 +3713,7 @@ RectTransform:
   m_Children:
   - {fileID: 6409556366990344693}
   - {fileID: 362817724196250075}
+  - {fileID: 28776850036317685}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

@@ -1,5 +1,11 @@
 ﻿using Dummiesman;
 using UnityEngine;
+using UnityEngine.XR;
+using UnityEngine.XR.Management;
+using UnityEngine.XR.Interaction.Toolkit.Locomotion;
+using UnityEngine.UI;
+using System;
+
 
 // Responsible for controlling graphical elements and events from UI.
 public class GUIController : MonoBehaviour
@@ -12,6 +18,8 @@ public class GUIController : MonoBehaviour
     [SerializeField]
     private GameObject selectModelPrefab;
     [SerializeField]
+    private GameObject viewIssuesPrefab;
+    [SerializeField]
     private GameObject flagPrefab;
     [SerializeField]
     private GameObject plane;
@@ -19,26 +27,36 @@ public class GUIController : MonoBehaviour
     private Transform cameraTransform;
     [SerializeField]
     private InputHandler inputHandler;
+    [SerializeField]
+    private GameObject character;
 
     // current 3D objects
     private GameObject currentMainMenu;
     private GameObject currentCreateIssue;
     private GameObject currentSelectModel;
+    private GameObject currentViewIssues;
     private GameObject currentModel;
 
     // Event handlers
     private MainMenuEventHandler mainMenuEventHandler;
     private CreateIssueEventHandler createIssueEventHandler;
     private SelectModelEventHandler selectModelEventHandler;
+    private ViewIssuesEventHandler viewIssuesEventHandler;
 
     private ModelController modelController;
+    
     private float spawnDistance = 4f;
     private string currentModelName;
+
+    private void Awake()
+    {
+        modelController = GameObject.FindWithTag("ModelController").GetComponent<ModelController>();
+    }
 
     // Called when the scene initializes.
     private void Start()
     {
-        modelController = GetComponent<ModelController>();
+        //modelController = GetComponent<ModelController>();
         if (inputHandler != null)
         {
             inputHandler.OnMenuButtonPressed += ToggleMenu;
@@ -63,6 +81,7 @@ public class GUIController : MonoBehaviour
             {
                 mainMenuEventHandler.createIssueButtonPressed += OnCreateIssueButtonPress;
                 mainMenuEventHandler.selectModelButtonPressed += OnSelectModelButtonPress;
+                mainMenuEventHandler.viewIssuesButtonPressed += OnViewIssuesButtonPress;
             }
         }
         else
@@ -73,6 +92,7 @@ public class GUIController : MonoBehaviour
             {
                 mainMenuEventHandler.createIssueButtonPressed -= OnCreateIssueButtonPress;
                 mainMenuEventHandler.selectModelButtonPressed -= OnSelectModelButtonPress;
+                mainMenuEventHandler.viewIssuesButtonPressed -= OnViewIssuesButtonPress;
             }
 
             Destroy(currentMainMenu);
@@ -84,24 +104,37 @@ public class GUIController : MonoBehaviour
     {
         Vector3 spawnPosition = cameraTransform.position + cameraTransform.forward * spawnDistance;
 
-        if (UIPrefab == mainMenuPrefab)
+        switch (UIPrefab)
         {
-            currentMainMenu = Instantiate(mainMenuPrefab, spawnPosition, Quaternion.identity);
-            currentMainMenu.transform.LookAt(cameraTransform);
-            currentMainMenu.transform.rotation = Quaternion.LookRotation(currentMainMenu.transform.position - cameraTransform.position);
+            case GameObject prefab when prefab == mainMenuPrefab:
+                currentMainMenu = Instantiate(mainMenuPrefab, spawnPosition, Quaternion.identity);
+                currentMainMenu.transform.LookAt(cameraTransform);
+                currentMainMenu.transform.rotation = Quaternion.LookRotation(currentMainMenu.transform.position - cameraTransform.position);
+                break;
+
+            case GameObject prefab when prefab == createIssuePrefab:
+                currentCreateIssue = Instantiate(createIssuePrefab, spawnPosition, Quaternion.identity);
+                currentCreateIssue.transform.LookAt(cameraTransform);
+                currentCreateIssue.transform.rotation = Quaternion.LookRotation(currentCreateIssue.transform.position - cameraTransform.position);
+                break;
+
+            case GameObject prefab when prefab == selectModelPrefab:
+                currentSelectModel = Instantiate(selectModelPrefab, spawnPosition, Quaternion.identity);
+                currentSelectModel.transform.LookAt(cameraTransform);
+                currentSelectModel.transform.rotation = Quaternion.LookRotation(currentSelectModel.transform.position - cameraTransform.position);
+                break;
+                
+            case GameObject prefab when prefab == viewIssuesPrefab:
+                currentViewIssues = Instantiate(viewIssuesPrefab, spawnPosition, Quaternion.identity);
+                currentViewIssues.transform.LookAt(cameraTransform);
+                currentViewIssues.transform.rotation = Quaternion.LookRotation(currentViewIssues.transform.position - cameraTransform.position);
+                break;
+
+            default:
+                Debug.LogError("Unhandled UIPrefab type.");
+                break;
         }
-        else if (UIPrefab == createIssuePrefab)
-        {
-            currentCreateIssue = Instantiate(createIssuePrefab, spawnPosition, Quaternion.identity);
-            currentCreateIssue.transform.LookAt(cameraTransform);
-            currentCreateIssue.transform.rotation = Quaternion.LookRotation(currentCreateIssue.transform.position - cameraTransform.position);
-        }
-        else if (UIPrefab == selectModelPrefab)
-        {
-            currentSelectModel = Instantiate(selectModelPrefab, spawnPosition, Quaternion.identity);
-            currentSelectModel.transform.LookAt(cameraTransform);
-            currentSelectModel.transform.rotation = Quaternion.LookRotation(currentSelectModel.transform.position - cameraTransform.position);
-        }
+
         UIPrefab.SetActive(true);
     }
 
@@ -116,10 +149,11 @@ public class GUIController : MonoBehaviour
         if (createIssueEventHandler != null)
         {
             createIssueEventHandler.OnCreateIssue += CreateIssue;
+            createIssueEventHandler.OnClose += HandleCloseEvent;
         }
     }
 
-    // Runs when create issue button is pressed in the main menu UI.
+    // Runs when select model button is pressed in the main menu UI.
     private void OnSelectModelButtonPress()
     {
         Destroy(currentMainMenu);
@@ -128,7 +162,41 @@ public class GUIController : MonoBehaviour
         if (selectModelEventHandler != null)
         {
             selectModelEventHandler.OnSelectModel += LoadModel;
+            selectModelEventHandler.OnClose += HandleCloseEvent;
         }
+    }
+
+    // Runs when view issues button is pressed in the main menu UI.
+    private void OnViewIssuesButtonPress()
+    {
+        Destroy(currentMainMenu);
+        SpawnUI(viewIssuesPrefab);
+        viewIssuesEventHandler = currentViewIssues.GetComponentInChildren<ViewIssuesEventHandler>();
+
+        if (viewIssuesEventHandler != null)
+        {
+            viewIssuesEventHandler.OnUpdate += UpdateIssue;
+            viewIssuesEventHandler.OnClose += HandleCloseEvent;
+            viewIssuesEventHandler.OnDelete += HandleDeleteEvent;
+        }
+    }
+
+    private void HandleDeleteEvent(int index, GameObject prefabInstance)
+    {
+        if (index > 0)
+        {
+            int indexWithOffset = index - 1; // Offset needed because of template option
+            DestroyFlag(indexWithOffset);
+            modelController.DeleteIssue(indexWithOffset, currentModelName);
+        }
+        Destroy(currentViewIssues);
+    }
+
+    private void UpdateIssue(int index, string subject, string dueDate, string assignedTo, string description)
+    {
+        int indexWithOffset = index - 1; // Offset needed because of template option
+        modelController.UpdateIssue(indexWithOffset, subject, dueDate, assignedTo, description, currentModelName);
+        Destroy(currentViewIssues);
     }
 
     // Runs when the create issue button is pressed in the create issue UI.
@@ -145,8 +213,26 @@ public class GUIController : MonoBehaviour
         {
             Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * spawnDistance;
             spawnPosition.y = Camera.main.transform.position.y;
-            Instantiate(flagPrefab, spawnPosition, Quaternion.identity);
-            modelController.AddFlagToModel(subject, dueDate, assignedTo, description, spawnPosition, currentModelName);
+            GameObject flagObject = Instantiate(flagPrefab, spawnPosition, Quaternion.identity);
+            Guid flagId = Guid.NewGuid();
+            FlagInstance flagInstance = flagObject.AddComponent<FlagInstance>();
+            flagInstance.FlagId = flagId;
+            modelController.AddIssueToModel(flagId, subject, dueDate, assignedTo, description, spawnPosition, currentModelName);
+        }
+    }
+
+    private void DestroyFlag(int index)
+    {
+        Issue issueToDelete = modelController.GetModel().Issues[index];
+        GameObject[] flagPrefabs = GameObject.FindGameObjectsWithTag("Flag");
+        foreach (var flagPrefab in flagPrefabs)
+        {
+            FlagInstance flagInstance = flagPrefab.GetComponent<FlagInstance>();
+            if (flagInstance != null && flagInstance.FlagId == issueToDelete.IssueId)
+            {
+                Destroy(flagPrefab);
+                break;
+            }
         }
     }
 
@@ -176,26 +262,42 @@ public class GUIController : MonoBehaviour
         OBJLoader loader = new OBJLoader();
         currentModel = loader.Load(objPath, mtlPath);
         AssignColorToMaterialInModel(currentModel);
-        SnapToPlane(currentModel);
+        MoveCharacterToModelHighestPoint(currentModel);
         modelController.InitializeModel(modelName);
         InstantiateFlags();
+        ReinitializeXRRig();
     }
 
-    // Moves the model down to the plane in the scene.
-    private void SnapToPlane(GameObject obj)
+    // Reinitialize XR Rig to prevent locomotion to break
+    private void ReinitializeXRRig()
     {
-        Renderer objRenderer = obj.GetComponentInChildren<Renderer>();
-        if (objRenderer != null)
-        {
-            float objBottomY = objRenderer.bounds.min.y;
+        character.SetActive(false);
+        character.SetActive(true);
+    }
 
-            Vector3 planePosition = plane.transform.position;
-            obj.transform.position = new Vector3(planePosition.x, planePosition.y - objBottomY, planePosition.z);
-        }
-        else
+    // Moves the character to the highest point in the model
+    void MoveCharacterToModelHighestPoint(GameObject model)
+    {
+        float highestY = CalculateHighestY(model);
+
+        Vector3 playerPosition = character.transform.position;
+        playerPosition.y = highestY;
+        character.transform.position = playerPosition;
+    }
+
+    // Calculates the highest y value of the model
+    float CalculateHighestY(GameObject model)
+    {
+        Renderer[] renderers = model.GetComponentsInChildren<Renderer>();
+
+        float highestY = float.MinValue;
+
+        foreach (Renderer renderer in renderers)
         {
-            Debug.LogError("No Renderer found on the loaded object or its children.");
+            highestY = Mathf.Max(highestY, renderer.bounds.max.y);
         }
+
+        return highestY;
     }
 
     // Assigns material base color to the 3D models materials.
@@ -224,15 +326,45 @@ public class GUIController : MonoBehaviour
         }
     }
 
-    // Instantiates flags from the model in the scene.
+    // Instantiates issues from the model as flag objects in the scene.
     private void InstantiateFlags()
     {
-        foreach (var flag in modelController.GetModel().Flags)
+        if (modelController.GetModel().Issues == null)
         {
-            if (flag != null && flagPrefab != null)
+            return;
+        }
+        foreach (Issue issue in modelController.GetModel().Issues)
+        {
+            if (issue != null && flagPrefab != null)
             {
-                Instantiate(flagPrefab, flag.Location, Quaternion.identity);
+                GameObject flagObject = Instantiate(flagPrefab, issue.Location, Quaternion.identity);
+                FlagInstance flagInstance = flagObject.AddComponent<FlagInstance>();
+                flagInstance.FlagId = issue.IssueId;
             }
+        }
+    }
+
+    // Handles the event triggered when a close button is pressed
+    private void HandleCloseEvent(GameObject prefabInstance)
+    {
+        Debug.Log(prefabInstance.name);
+        Destroy(prefabInstance);
+
+        if (prefabInstance == currentCreateIssue && createIssueEventHandler != null)
+        {
+            createIssueEventHandler.OnCreateIssue -= CreateIssue;
+            createIssueEventHandler.OnClose -= HandleCloseEvent;
+        }
+        else if (prefabInstance == currentSelectModel && selectModelEventHandler != null)
+        {
+            selectModelEventHandler.OnSelectModel -= LoadModel;
+            selectModelEventHandler.OnClose -= HandleCloseEvent;
+        }
+        else if (prefabInstance == currentViewIssues && viewIssuesEventHandler != null)
+        {
+            viewIssuesEventHandler.OnUpdate -= UpdateIssue;
+            viewIssuesEventHandler.OnClose -= HandleCloseEvent;
+            viewIssuesEventHandler.OnDelete -= HandleDeleteEvent;
         }
     }
 }

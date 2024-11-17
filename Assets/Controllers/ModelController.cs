@@ -4,11 +4,10 @@ using System.IO;
 using System;
 
 
-// Class is used to control model.
+// Class is used to control model state.
 public class ModelController : MonoBehaviour
 {
     private Model model;
-    private List<Flag> flagList;
 
     // Initializes model.
     public void InitializeModel(string modelName)
@@ -16,24 +15,33 @@ public class ModelController : MonoBehaviour
         if (ModelExists(modelName))
         {
             model = JsonUtil.Deserialize<Model>(modelName);
-            flagList = model.Flags;
         }
         else
         {
-            flagList = new List<Flag>();
-            model = new Model(Guid.NewGuid(), modelName, flagList);
+            model = new Model(Guid.NewGuid(), modelName, new List<Issue>());
             JsonUtil.Serialize(model, modelName);
         }
     }
 
-    // Adds a flag to the model and serializes model data.
-    public void AddFlagToModel(string subject, string dueDate, string assignedTo, string description, Vector3 spawnPosition, string modelName)
+    public void AddIssueToModel(Guid issueId, string subject, string dueDate, string assignedTo, string description, Vector3 spawnPosition, string modelName)
     {
-        Flag flag = new Flag(Guid.NewGuid(), spawnPosition, subject, dueDate, assignedTo, description);
-        if (flagList != null)
+        Issue issue = new Issue(issueId, spawnPosition, subject, dueDate, assignedTo, description);
+        if (model.Issues != null)
         {
-            flagList.Add(flag);
+            model.AddIssue(issue);
         }
+        JsonUtil.Serialize(model, modelName);
+    }
+
+    public void UpdateIssue(int index, string subject, string dueDate, string assignedTo, string description, string modelName)
+    {
+        model.UpdateIssue(index, subject, dueDate, assignedTo, description);
+        JsonUtil.Serialize(model, modelName);
+    }
+
+    public void DeleteIssue(int index, string modelName)
+    {
+        model.DeleteIssue(index);
         JsonUtil.Serialize(model, modelName);
     }
 

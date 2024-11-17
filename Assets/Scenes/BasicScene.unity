@@ -385,6 +385,10 @@ PrefabInstance:
       propertyPath: m_EnableFly
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 153982007679157697, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_MoveSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_Name
       value: XR Origin (XR Rig)
@@ -574,6 +578,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &804103249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 441087506}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1058976837
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +593,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1058976839}
   - component: {fileID: 1058976838}
-  - component: {fileID: 1058976840}
   m_Layer: 0
   m_Name: GUIController
   m_TagString: Untagged
@@ -607,10 +615,12 @@ MonoBehaviour:
   mainMenuPrefab: {fileID: 7783865097070107226, guid: 3e33875c16f03f84e88216fe574039ce, type: 3}
   createIssuePrefab: {fileID: 7783865097070107226, guid: 94fdd6396d831034c80c3e624944f061, type: 3}
   selectModelPrefab: {fileID: 7783865097070107226, guid: f87bbe1f53454444ab87aa5d5e25cff7, type: 3}
+  viewIssuesPrefab: {fileID: 7783865097070107226, guid: eb89eee325b7ca543811bf49b64fd257, type: 3}
   flagPrefab: {fileID: 7049068575926722093, guid: c3b8f907c4289c0458a42cc277ee8ef6, type: 3}
   plane: {fileID: 1249617917}
   cameraTransform: {fileID: 1150629025}
   inputHandler: {fileID: 252097973}
+  character: {fileID: 804103249}
 --- !u!4 &1058976839
 Transform:
   m_ObjectHideFlags: 0
@@ -626,18 +636,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1058976840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1058976837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c922341df71e87e4ca5a82d502608e1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1150629025 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1767192434, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
@@ -662,7 +660,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1249617918
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -831,6 +829,50 @@ MonoBehaviour:
   m_Teleporting:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1390168491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1390168493}
+  - component: {fileID: 1390168492}
+  m_Layer: 0
+  m_Name: ModelController
+  m_TagString: ModelController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1390168492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390168491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c922341df71e87e4ca5a82d502608e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1390168493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390168491}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.075239, y: 4.6681795, z: -20.584253}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1637331744
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,5 +952,6 @@ SceneRoots:
   - {fileID: 450975771}
   - {fileID: 1637331747}
   - {fileID: 159193336}
+  - {fileID: 1390168493}
   - {fileID: 1058976839}
   - {fileID: 252097974}

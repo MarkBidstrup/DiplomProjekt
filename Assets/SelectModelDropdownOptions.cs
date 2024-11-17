@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DropdownOptions : MonoBehaviour
+public class SelectModelManager : MonoBehaviour
 {
     public TMP_Dropdown dropdown;
     private string folderPath = "C:\\Temp\\Models";
@@ -13,7 +13,7 @@ public class DropdownOptions : MonoBehaviour
     void Start()
     {
         List<string> modelNames = GetModelNames(folderPath);
-        SetDropdownOptions(modelNames);
+        DropdownUtil.SetDropdownOptions(modelNames, dropdown);
     }
 
     List<string> GetModelNames(string path)
@@ -35,16 +35,5 @@ public class DropdownOptions : MonoBehaviour
         }
 
         return fileNames;
-    }
-
-    void SetDropdownOptions(List<string> options)
-    {
-        List<TMP_Dropdown.OptionData> dropdownOptions = new List<TMP_Dropdown.OptionData>();
-
-        foreach (string option in options)
-        {
-            dropdownOptions.Add(new TMP_Dropdown.OptionData(option));
-        }
-        dropdown.AddOptions(dropdownOptions);
     }
 }
