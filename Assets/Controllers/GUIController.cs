@@ -56,10 +56,10 @@ public class GUIController : MonoBehaviour
     // Called when the scene initializes.
     private void Start()
     {
-        //modelController = GetComponent<ModelController>();
         if (inputHandler != null)
         {
             inputHandler.OnMenuButtonPressed += ToggleMenu;
+            inputHandler.OnleftPrimaryButtonPressed += OnCreateIssueButtonPress;
         }
 
         if (mainMenuPrefab != null)
@@ -141,6 +141,10 @@ public class GUIController : MonoBehaviour
     // Runs when create issue button is pressed in the main menu UI.
     private void OnCreateIssueButtonPress()
     {
+        if (modelController.GetModel() == null)
+        {
+            return;
+        }
         Destroy(currentMainMenu);
         SpawnUI(createIssuePrefab);
 
@@ -169,6 +173,10 @@ public class GUIController : MonoBehaviour
     // Runs when view issues button is pressed in the main menu UI.
     private void OnViewIssuesButtonPress()
     {
+        if (modelController.GetModel() == null)
+        {
+            return;
+        }
         Destroy(currentMainMenu);
         SpawnUI(viewIssuesPrefab);
         viewIssuesEventHandler = currentViewIssues.GetComponentInChildren<ViewIssuesEventHandler>();
@@ -277,7 +285,7 @@ public class GUIController : MonoBehaviour
     }
 
     // Moves the character to the highest point in the model
-    void MoveCharacterToModelHighestPoint(GameObject model)
+    private void MoveCharacterToModelHighestPoint(GameObject model)
     {
         float highestY = CalculateHighestY(model);
 
@@ -287,7 +295,7 @@ public class GUIController : MonoBehaviour
     }
 
     // Calculates the highest y value of the model
-    float CalculateHighestY(GameObject model)
+    private float CalculateHighestY(GameObject model)
     {
         Renderer[] renderers = model.GetComponentsInChildren<Renderer>();
 
@@ -350,8 +358,7 @@ public class GUIController : MonoBehaviour
     {
         Issue issueToTeleport = modelController.GetModel().Issues[index-1];
         character.transform.position = issueToTeleport.Location;
-        Vector3 prefabPosition = Camera.main.transform.position + Camera.main.transform.forward * spawnDistance;
-        prefabPosition.y = Camera.main.transform.position.y;
+        Destroy(prefabInstance);
     }
 
     // Handles the event triggered when a close button is pressed

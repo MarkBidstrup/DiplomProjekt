@@ -8,10 +8,12 @@ using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 public class InputHandler : MonoBehaviour
 {
     public event Action OnMenuButtonPressed;
+    public event Action OnleftPrimaryButtonPressed;
     private InputDevice leftHandDevice;
     private InputDevice rightHandDevice;
     private bool menuButtonWasPressed = false;
-    private bool rightPrimaryButtonWasPressed = false;
+    private bool leftPrimaryButtonWasPressed = false;
+    private bool createIssueUIOpen = false;
 
     void Update()
     {
@@ -29,20 +31,20 @@ public class InputHandler : MonoBehaviour
             }
             menuButtonWasPressed = menuButtonPressed;
         }
+        bool leftPrimaryButtonPressed = false;
+        if (leftHandDevice.isValid && leftHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out leftPrimaryButtonPressed))
+        {
+            if (leftPrimaryButtonPressed && !leftPrimaryButtonWasPressed && !createIssueUIOpen)
+            {
+                OnleftPrimaryButtonPressed.Invoke();
+            }
+            leftPrimaryButtonWasPressed = leftPrimaryButtonPressed;
+        }
 
         // Check for right controller primary button press.
         if (!rightHandDevice.isValid)
         {
             rightHandDevice = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
-        }
-        bool rightPrimaryButtonPressed = false;
-        if (rightHandDevice.isValid && rightHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out rightPrimaryButtonPressed))
-        {
-            if (rightPrimaryButtonPressed && !rightPrimaryButtonWasPressed)
-            {
-                Debug.Log("Right primary button was pressed");
-            }
-            rightPrimaryButtonWasPressed = rightPrimaryButtonPressed;
         }
     }
 }

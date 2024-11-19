@@ -50,6 +50,48 @@
       "DueDate": "4",
       "AssignedTo": "Afvanding / Drainage",
       "Description": "4"
+    },
+    {
+      "IssueId": "9b2ba84c-7ef8-44c3-92a6-851a829c321d",
+      "Location": {
+        "x": -47.22406,
+        "y": 115.8405,
+        "z": 21.743927,
+        "normalized": {
+          "x": -0.3719245,
+          "y": 0.912329853,
+          "z": 0.171249554,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 126.972168,
+        "sqrMagnitude": 16121.9316
+      },
+      "Subject": "1",
+      "DueDate": "",
+      "AssignedTo": "Afvanding / Drainage",
+      "Description": ""
+    },
+    {
+      "IssueId": "c1abaa36-61f0-4384-9a39-24a820bbdee6",
+      "Location": {
+        "x": 8.187833,
+        "y": 121.429008,
+        "z": 16.9259968,
+        "normalized": {
+          "x": 0.06663487,
+          "y": 0.988223255,
+          "z": 0.1377485,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 122.876091,
+        "sqrMagnitude": 15098.5342
+      },
+      "Subject": "5",
+      "DueDate": "",
+      "AssignedTo": "Afvanding / Drainage",
+      "Description": ""
     }
   ]
 }
