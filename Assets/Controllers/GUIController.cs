@@ -178,6 +178,7 @@ public class GUIController : MonoBehaviour
             viewIssuesEventHandler.OnUpdate += UpdateIssue;
             viewIssuesEventHandler.OnClose += HandleCloseEvent;
             viewIssuesEventHandler.OnDelete += HandleDeleteEvent;
+            viewIssuesEventHandler.OnTeleport += HandleTeleportEvent;
         }
     }
 
@@ -344,6 +345,15 @@ public class GUIController : MonoBehaviour
         }
     }
 
+    // Handles the teleport event
+    private void HandleTeleportEvent(int index, GameObject prefabInstance)
+    {
+        Issue issueToTeleport = modelController.GetModel().Issues[index-1];
+        character.transform.position = issueToTeleport.Location;
+        Vector3 prefabPosition = Camera.main.transform.position + Camera.main.transform.forward * spawnDistance;
+        prefabPosition.y = Camera.main.transform.position.y;
+    }
+
     // Handles the event triggered when a close button is pressed
     private void HandleCloseEvent(GameObject prefabInstance)
     {
@@ -365,6 +375,7 @@ public class GUIController : MonoBehaviour
             viewIssuesEventHandler.OnUpdate -= UpdateIssue;
             viewIssuesEventHandler.OnClose -= HandleCloseEvent;
             viewIssuesEventHandler.OnDelete -= HandleDeleteEvent;
+            viewIssuesEventHandler.OnTeleport -= HandleTeleportEvent;
         }
     }
 }

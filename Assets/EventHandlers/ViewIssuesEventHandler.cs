@@ -18,11 +18,13 @@ public class ViewIssuesEventHandler : MonoBehaviour
     private TMP_InputField description;
 
     public delegate void OnUpdateDelegate(int index, string subject, string dueDate, string assignedTo, string description);
-    public delegate void onDeleteDelegate(int index, GameObject prefab);
+    public delegate void OnDeleteDelegate(int index, GameObject prefab);
+    public delegate void OnTeleportDelegate(int index, GameObject prefab);
 
     public event OnUpdateDelegate OnUpdate;
     public event Action<GameObject> OnClose;
-    public event onDeleteDelegate OnDelete;
+    public event OnDeleteDelegate OnDelete;
+    public event OnTeleportDelegate OnTeleport;
 
     public void OnUpdatePressed()
     {
@@ -37,5 +39,10 @@ public class ViewIssuesEventHandler : MonoBehaviour
     public void OnDeleteButtonPressed()
     {
         OnDelete?.Invoke(selectIssue.value, prefab);
+    }
+
+    public void OnTeleportButtonPressed()
+    {
+        OnTeleport?.Invoke(selectIssue.value, prefab);
     }
 }
