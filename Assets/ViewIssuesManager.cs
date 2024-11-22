@@ -19,7 +19,6 @@ public class ViewIssuesManager : MonoBehaviour
 
     private ModelController modelController;
 
-    // TODO: Handle nulls 
     private void Awake()
     {
         modelController = GameObject.FindWithTag("ModelController").GetComponent<ModelController>();

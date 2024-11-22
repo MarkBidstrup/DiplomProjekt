@@ -2122,6 +2122,7 @@ MonoBehaviour:
   plane: {fileID: 0}
   cameraTransform: {fileID: 0}
   inputHandler: {fileID: 0}
+  character: {fileID: 0}
 --- !u!1 &8751939213379416137
 GameObject:
   m_ObjectHideFlags: 0

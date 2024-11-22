@@ -1,0 +1,69 @@
+{
+  "ModelId": "bfe267f4-78ed-4910-a48d-891052c4e761",
+  "ModelName": "FællesmodelTilMark_v3_heavy",
+  "Issues": [
+    {
+      "IssueId": "db5bfb91-c6f4-4987-88bd-f8b6c94cd802",
+      "Location": {
+        "x": 255.201569,
+        "y": 105.153893,
+        "z": 85.7171555,
+        "normalized": {
+          "x": 0.882989049,
+          "y": 0.363829017,
+          "z": 0.296578556,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 289.020081,
+        "sqrMagnitude": 83532.61
+      },
+      "Subject": "Grafitti",
+      "DueDate": "4/8-2024",
+      "AssignedTo": "Projektledelse / Project management",
+      "Description": "Mangler grafitti i modellen for at give mere realistisk look."
+    },
+    {
+      "IssueId": "3e99e40b-ce1b-4313-a043-b931ddd0fcb1",
+      "Location": {
+        "x": 137.316742,
+        "y": 109.2704,
+        "z": -18.09922,
+        "normalized": {
+          "x": 0.7783579,
+          "y": 0.6193817,
+          "z": -0.102592528,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 176.4185,
+        "sqrMagnitude": 31123.49
+      },
+      "Subject": "Indretning",
+      "DueDate": "5/7-2024",
+      "AssignedTo": "Arbejdsmiljø / Working environment",
+      "Description": "Rummet mangler indretningselementer."
+    },
+    {
+      "IssueId": "3f2c76c0-08e6-4e71-b414-280f4df8b05f",
+      "Location": {
+        "x": -25.6247,
+        "y": 108.893044,
+        "z": -87.04819,
+        "normalized": {
+          "x": -0.18078,
+          "y": 0.7682308,
+          "z": -0.614117265,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 141.745224,
+        "sqrMagnitude": 20091.707
+      },
+      "Subject": "Stationsindgang",
+      "DueDate": "12/6-2024",
+      "AssignedTo": "Natur og miljø / Environment",
+      "Description": "Indgangens frontparti er ikke i korrekt form."
+    }
+  ]
+}

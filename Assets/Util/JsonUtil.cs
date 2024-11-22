@@ -6,7 +6,7 @@ using UnityEngine;
 // Utility class to serialize/deserialize objects.
 public static class JsonUtil
 {
-    public static string FilePath {  get; private set; }
+    private static string FilePath { get; set; }
     
     public static void Serialize<T>(T obj, string filePath)
     {

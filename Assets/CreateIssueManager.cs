@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class CreateIssueManager : MonoBehaviour
 {
-    public TMP_Dropdown dropdown;
+    [SerializeField]
+    private TMP_Dropdown dropdown;
 
     private void Awake()
     {

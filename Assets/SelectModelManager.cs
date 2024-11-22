@@ -7,16 +7,17 @@ using UnityEngine.UI;
 
 public class SelectModelManager : MonoBehaviour
 {
-    public TMP_Dropdown dropdown;
+    [SerializeField]
+    private TMP_Dropdown dropdown;
     private string folderPath = "C:\\Temp\\Models";
 
-    void Start()
+    private void Start()
     {
         List<string> modelNames = GetModelNames(folderPath);
         DropdownUtil.SetDropdownOptions(modelNames, dropdown);
     }
 
-    List<string> GetModelNames(string path)
+    private List<string> GetModelNames(string path)
     {
         List<string> fileNames = new List<string>();
 

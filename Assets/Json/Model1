@@ -1,97 +1,97 @@
 {
-  "ModelId": "c5ae1b1e-18f5-4dc4-8742-dc2c3a5e6f75",
+  "ModelId": "6af848d9-0be9-4cfc-953c-def9359a98bc",
   "ModelName": "Model1",
   "Issues": [
     {
-      "IssueId": "1994f94c-e87c-4661-9bdb-b6a1e0b8150c",
+      "IssueId": "a4f75c9b-2b52-4968-b8a1-4352ace74512",
       "Location": {
-        "x": -3.24782324,
-        "y": 115.893829,
-        "z": 39.0117,
+        "x": -36.2855453,
+        "y": 111.7289,
+        "z": 50.4092369,
         "normalized": {
-          "x": -0.0265503861,
-          "y": 0.9474117,
-          "z": 0.318913817,
+          "x": -0.283852875,
+          "y": 0.8740276,
+          "z": 0.394339025,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 127.83223,
+        "sqrMagnitude": 16341.0781
+      },
+      "Subject": "hvid dør",
+      "DueDate": "2/2-25",
+      "AssignedTo": "Tværgående / Cross disciplinary",
+      "Description": "Der er noget galt med farven på døren. Den skulle have været blå."
+    },
+    {
+      "IssueId": "7ed13765-e195-4f10-aaab-e5ef46070866",
+      "Location": {
+        "x": 20.5654011,
+        "y": 107.159416,
+        "z": 69.53667,
+        "normalized": {
+          "x": 0.158942848,
+          "y": 0.8281979,
+          "z": 0.537424743,
           "normalized": {
-            "x": -0.026550388,
-            "y": 0.9474118,
-            "z": 0.318913847,
+            "x": 0.158942863,
+            "y": 0.828197956,
+            "z": 0.5374248,
             "magnitude": 1.0,
-            "sqrMagnitude": 1.0
+            "sqrMagnitude": 1.00000012
           },
           "magnitude": 0.99999994,
-          "sqrMagnitude": 0.9999999
+          "sqrMagnitude": 0.99999994
         },
-        "magnitude": 122.326782,
-        "sqrMagnitude": 14963.8408
+        "magnitude": 129.388657,
+        "sqrMagnitude": 16741.4238
       },
-      "Subject": "3",
-      "DueDate": "3",
-      "AssignedTo": "Afvanding / Drainage",
-      "Description": "3"
+      "Subject": "Manglende cykel rampe",
+      "DueDate": "3/4-2025",
+      "AssignedTo": "Arbejdsmiljø / Working environment",
+      "Description": "Der mangler cykel rampe på trappen."
     },
     {
-      "IssueId": "e54d5049-514e-4655-9a03-32306a9b6a74",
+      "IssueId": "aa7a60dc-5885-425e-a01f-115ec8171d6e",
       "Location": {
-        "x": -9.309658,
-        "y": 115.685539,
-        "z": 57.97613,
+        "x": 196.0944,
+        "y": 109.465851,
+        "z": 98.19939,
         "normalized": {
-          "x": -0.0717593,
-          "y": 0.8917098,
-          "z": 0.446882874,
-          "magnitude": 1.0,
-          "sqrMagnitude": 1.00000012
-        },
-        "magnitude": 129.734512,
-        "sqrMagnitude": 16831.0449
-      },
-      "Subject": "4",
-      "DueDate": "4",
-      "AssignedTo": "Afvanding / Drainage",
-      "Description": "4"
-    },
-    {
-      "IssueId": "9b2ba84c-7ef8-44c3-92a6-851a829c321d",
-      "Location": {
-        "x": -47.22406,
-        "y": 115.8405,
-        "z": 21.743927,
-        "normalized": {
-          "x": -0.3719245,
-          "y": 0.912329853,
-          "z": 0.171249554,
+          "x": 0.8000262,
+          "y": 0.446598917,
+          "z": 0.400633961,
           "magnitude": 1.0,
           "sqrMagnitude": 1.0
         },
-        "magnitude": 126.972168,
-        "sqrMagnitude": 16121.9316
+        "magnitude": 245.109985,
+        "sqrMagnitude": 60078.9063
       },
-      "Subject": "1",
-      "DueDate": "",
-      "AssignedTo": "Afvanding / Drainage",
-      "Description": ""
+      "Subject": "Skæv låge",
+      "DueDate": "7/7-2024",
+      "AssignedTo": "Vejdesign og -teknik / Road design and -equipment",
+      "Description": "Lågen er skæv."
     },
     {
-      "IssueId": "c1abaa36-61f0-4384-9a39-24a820bbdee6",
+      "IssueId": "0df5ed1d-31be-412f-9d4b-dee09469e5d5",
       "Location": {
-        "x": 8.187833,
-        "y": 121.429008,
-        "z": 16.9259968,
+        "x": 339.9161,
+        "y": 113.330727,
+        "z": 147.975922,
         "normalized": {
-          "x": 0.06663487,
-          "y": 0.988223255,
-          "z": 0.1377485,
+          "x": 0.8768309,
+          "y": 0.292342365,
+          "z": 0.3817114,
           "magnitude": 1.0,
           "sqrMagnitude": 1.0
         },
-        "magnitude": 122.876091,
-        "sqrMagnitude": 15098.5342
+        "magnitude": 387.6644,
+        "sqrMagnitude": 150283.688
       },
-      "Subject": "5",
-      "DueDate": "",
-      "AssignedTo": "Afvanding / Drainage",
-      "Description": ""
+      "Subject": "Bro i model",
+      "DueDate": "5/9-2024",
+      "AssignedTo": "Broer og konstruktioner / Bridges and Structures",
+      "Description": "Broen skal ikke være en del af modellen."
     }
   ]
 }

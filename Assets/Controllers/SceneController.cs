@@ -8,7 +8,7 @@ using System;
 
 
 // Responsible for controlling graphical elements and events from UI.
-public class GUIController : MonoBehaviour
+public class SceneController : MonoBehaviour
 {
     // Referenced in the unity editor inspector
     [SerializeField]
@@ -58,8 +58,8 @@ public class GUIController : MonoBehaviour
     {
         if (inputHandler != null)
         {
-            inputHandler.OnMenuButtonPressed += ToggleMenu;
-            inputHandler.OnleftPrimaryButtonPressed += OnCreateIssueButtonPress;
+            inputHandler.OnMenuButtonPressed += HandleMenuButtonPressedEvent;
+            inputHandler.OnleftPrimaryButtonPressed += HandleCreateIssueButtonPressedEvent;
         }
 
         if (mainMenuPrefab != null)
@@ -69,7 +69,7 @@ public class GUIController : MonoBehaviour
     }
 
     // Toggles the main menu UI and subscribes/unsubscribes to menu events.
-    private void ToggleMenu()
+    private void HandleMenuButtonPressedEvent()
     {
         if (currentMainMenu == null)
         {
@@ -79,9 +79,9 @@ public class GUIController : MonoBehaviour
 
             if (mainMenuEventHandler != null )
             {
-                mainMenuEventHandler.createIssueButtonPressed += OnCreateIssueButtonPress;
-                mainMenuEventHandler.selectModelButtonPressed += OnSelectModelButtonPress;
-                mainMenuEventHandler.viewIssuesButtonPressed += OnViewIssuesButtonPress;
+                mainMenuEventHandler.createIssueButtonPressed += HandleCreateIssueButtonPressedEvent;
+                mainMenuEventHandler.selectModelButtonPressed += HandleSelectModelButtonPressedEvent;
+                mainMenuEventHandler.viewIssuesButtonPressed += HandleViewIssuesButtonPressedEvent;
             }
         }
         else
@@ -90,9 +90,9 @@ public class GUIController : MonoBehaviour
 
             if (mainMenuEventHandler != null)
             {
-                mainMenuEventHandler.createIssueButtonPressed -= OnCreateIssueButtonPress;
-                mainMenuEventHandler.selectModelButtonPressed -= OnSelectModelButtonPress;
-                mainMenuEventHandler.viewIssuesButtonPressed -= OnViewIssuesButtonPress;
+                mainMenuEventHandler.createIssueButtonPressed -= HandleCreateIssueButtonPressedEvent;
+                mainMenuEventHandler.selectModelButtonPressed -= HandleSelectModelButtonPressedEvent;
+                mainMenuEventHandler.viewIssuesButtonPressed -= HandleViewIssuesButtonPressedEvent;
             }
 
             Destroy(currentMainMenu);
@@ -139,7 +139,7 @@ public class GUIController : MonoBehaviour
     }
 
     // Runs when create issue button is pressed in the main menu UI.
-    private void OnCreateIssueButtonPress()
+    private void HandleCreateIssueButtonPressedEvent()
     {
         if (modelController.GetModel() == null)
         {
@@ -152,26 +152,26 @@ public class GUIController : MonoBehaviour
 
         if (createIssueEventHandler != null)
         {
-            createIssueEventHandler.OnCreateIssue += CreateIssue;
+            createIssueEventHandler.OnCreateIssue += HandleCreateIssueEvent;
             createIssueEventHandler.OnClose += HandleCloseEvent;
         }
     }
 
     // Runs when select model button is pressed in the main menu UI.
-    private void OnSelectModelButtonPress()
+    private void HandleSelectModelButtonPressedEvent()
     {
         Destroy(currentMainMenu);
         SpawnUI(selectModelPrefab);
         selectModelEventHandler = currentSelectModel.GetComponentInChildren<SelectModelEventHandler>();
         if (selectModelEventHandler != null)
         {
-            selectModelEventHandler.OnSelectModel += LoadModel;
+            selectModelEventHandler.OnSelectModel += HandleSelectModelEvent;
             selectModelEventHandler.OnClose += HandleCloseEvent;
         }
     }
 
     // Runs when view issues button is pressed in the main menu UI.
-    private void OnViewIssuesButtonPress()
+    private void HandleViewIssuesButtonPressedEvent()
     {
         if (modelController.GetModel() == null)
         {
@@ -183,7 +183,7 @@ public class GUIController : MonoBehaviour
 
         if (viewIssuesEventHandler != null)
         {
-            viewIssuesEventHandler.OnUpdate += UpdateIssue;
+            viewIssuesEventHandler.OnUpdate += HandleUpdateEvent;
             viewIssuesEventHandler.OnClose += HandleCloseEvent;
             viewIssuesEventHandler.OnDelete += HandleDeleteEvent;
             viewIssuesEventHandler.OnTeleport += HandleTeleportEvent;
@@ -201,7 +201,7 @@ public class GUIController : MonoBehaviour
         Destroy(currentViewIssues);
     }
 
-    private void UpdateIssue(int index, string subject, string dueDate, string assignedTo, string description)
+    private void HandleUpdateEvent(int index, string subject, string dueDate, string assignedTo, string description)
     {
         int indexWithOffset = index - 1; // Offset needed because of template option
         modelController.UpdateIssue(indexWithOffset, subject, dueDate, assignedTo, description, currentModelName);
@@ -209,7 +209,7 @@ public class GUIController : MonoBehaviour
     }
 
     // Runs when the create issue button is pressed in the create issue UI.
-    private void CreateIssue(string subject, string dueDate, string assignedTo, string description)
+    private void HandleCreateIssueEvent(string subject, string dueDate, string assignedTo, string description)
     {
         SpawnFlag(subject, dueDate, assignedTo, description);
         Destroy(currentCreateIssue);
@@ -249,7 +249,7 @@ public class GUIController : MonoBehaviour
     // Destroys all flags in the scene.
     // Imports model in runtime with OBJLoader.
     // Instantiates flags in the loaded model to the scene.
-    private void LoadModel(string modelName)
+    private void HandleSelectModelEvent(string modelName)
     {
         if (modelName == null)
         {
@@ -356,9 +356,12 @@ public class GUIController : MonoBehaviour
     // Handles the teleport event
     private void HandleTeleportEvent(int index, GameObject prefabInstance)
     {
-        Issue issueToTeleport = modelController.GetModel().Issues[index-1];
-        character.transform.position = issueToTeleport.Location;
-        Destroy(prefabInstance);
+        if (index > 0)
+        {
+            Issue issueToTeleport = modelController.GetModel().Issues[index-1];
+            character.transform.position = issueToTeleport.Location;
+            Destroy(prefabInstance);
+        }
     }
 
     // Handles the event triggered when a close button is pressed
@@ -369,17 +372,17 @@ public class GUIController : MonoBehaviour
 
         if (prefabInstance == currentCreateIssue && createIssueEventHandler != null)
         {
-            createIssueEventHandler.OnCreateIssue -= CreateIssue;
+            createIssueEventHandler.OnCreateIssue -= HandleCreateIssueEvent;
             createIssueEventHandler.OnClose -= HandleCloseEvent;
         }
         else if (prefabInstance == currentSelectModel && selectModelEventHandler != null)
         {
-            selectModelEventHandler.OnSelectModel -= LoadModel;
+            selectModelEventHandler.OnSelectModel -= HandleSelectModelEvent;
             selectModelEventHandler.OnClose -= HandleCloseEvent;
         }
         else if (prefabInstance == currentViewIssues && viewIssuesEventHandler != null)
         {
-            viewIssuesEventHandler.OnUpdate -= UpdateIssue;
+            viewIssuesEventHandler.OnUpdate -= HandleUpdateEvent;
             viewIssuesEventHandler.OnClose -= HandleCloseEvent;
             viewIssuesEventHandler.OnDelete -= HandleDeleteEvent;
             viewIssuesEventHandler.OnTeleport -= HandleTeleportEvent;
