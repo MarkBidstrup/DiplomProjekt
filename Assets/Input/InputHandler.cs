@@ -9,10 +9,12 @@ public class InputHandler : MonoBehaviour
 {
     public event Action OnMenuButtonPressed;
     public event Action OnleftPrimaryButtonPressed;
+    public event Action OnrightPrimaryButtonPressed;
     private InputDevice leftHandDevice;
     private InputDevice rightHandDevice;
     private bool menuButtonWasPressed = false;
     private bool leftPrimaryButtonWasPressed = false;
+    private bool rightPrimaryButtonWasPressed = false;
     private bool createIssueUIOpen = false;
 
     void Update()
@@ -45,6 +47,15 @@ public class InputHandler : MonoBehaviour
         if (!rightHandDevice.isValid)
         {
             rightHandDevice = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+        }
+        bool rightPrimaryButtonPressed = false;
+        if (rightHandDevice.isValid && rightHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out rightPrimaryButtonPressed))
+        {
+            if (rightPrimaryButtonPressed && !rightPrimaryButtonWasPressed && !createIssueUIOpen)
+            {
+                OnrightPrimaryButtonPressed.Invoke();
+            }
+            rightPrimaryButtonWasPressed = rightPrimaryButtonPressed;
         }
     }
 }

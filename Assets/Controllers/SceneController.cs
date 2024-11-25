@@ -5,6 +5,9 @@ using UnityEngine.XR.Management;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion;
 using UnityEngine.UI;
 using System;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
+using UnityEngine.XR.Interaction.Toolkit.Locomotion.Movement;
+using UnityEngine.XR.Interaction.Toolkit;
 
 
 // Responsible for controlling graphical elements and events from UI.
@@ -45,8 +48,9 @@ public class SceneController : MonoBehaviour
 
     private ModelController modelController;
     
-    private float spawnDistance = 4f;
+    private float spawnDistance = 1f;
     private string currentModelName;
+    private bool isTurbo = false;
 
     private void Awake()
     {
@@ -60,6 +64,7 @@ public class SceneController : MonoBehaviour
         {
             inputHandler.OnMenuButtonPressed += HandleMenuButtonPressedEvent;
             inputHandler.OnleftPrimaryButtonPressed += HandleCreateIssueButtonPressedEvent;
+            inputHandler.OnrightPrimaryButtonPressed += HandleRightPrimaryButtonPressedEvent;
         }
 
         if (mainMenuPrefab != null)
@@ -123,7 +128,7 @@ public class SceneController : MonoBehaviour
                 currentSelectModel.transform.LookAt(cameraTransform);
                 currentSelectModel.transform.rotation = Quaternion.LookRotation(currentSelectModel.transform.position - cameraTransform.position);
                 break;
-                
+
             case GameObject prefab when prefab == viewIssuesPrefab:
                 currentViewIssues = Instantiate(viewIssuesPrefab, spawnPosition, Quaternion.identity);
                 currentViewIssues.transform.LookAt(cameraTransform);
@@ -386,6 +391,26 @@ public class SceneController : MonoBehaviour
             viewIssuesEventHandler.OnClose -= HandleCloseEvent;
             viewIssuesEventHandler.OnDelete -= HandleDeleteEvent;
             viewIssuesEventHandler.OnTeleport -= HandleTeleportEvent;
+        }
+    }
+
+    // Handles the event triggered when the right primary button is pressed
+    // Toggles turbo move speed
+    private void HandleRightPrimaryButtonPressedEvent()
+    {
+        ContinuousMoveProvider moveProvider = FindObjectOfType<ContinuousMoveProvider>();
+        if (moveProvider != null)
+        {
+            if (!isTurbo)
+            {
+                moveProvider.moveSpeed = 25f;
+                isTurbo = true;
+            }
+            else
+            {
+                moveProvider.moveSpeed = 5f;
+                isTurbo = false;
+            }
         }
     }
 }
