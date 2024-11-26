@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 252097974}
   - component: {fileID: 252097973}
   m_Layer: 0
-  m_Name: InputHandler
+  m_Name: InputEventPublisher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -619,7 +619,7 @@ MonoBehaviour:
   flagPrefab: {fileID: 7049068575926722093, guid: c3b8f907c4289c0458a42cc277ee8ef6, type: 3}
   plane: {fileID: 1249617917}
   cameraTransform: {fileID: 1150629025}
-  inputHandler: {fileID: 252097973}
+  inputEventPublisher: {fileID: 252097973}
   character: {fileID: 804103249}
 --- !u!4 &1058976839
 Transform:

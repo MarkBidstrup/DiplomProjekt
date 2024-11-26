@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 
 
-// EventHandler used by the main menu UI.
-public class MainMenuEventHandler : MonoBehaviour
+// EventPublisher used by the main menu UI.
+public class MainMenuEventPublisher : MonoBehaviour
 {
     public event Action createIssueButtonPressed;
     public event Action selectModelButtonPressed;

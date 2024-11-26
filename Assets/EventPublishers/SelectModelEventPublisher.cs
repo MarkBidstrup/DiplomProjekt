@@ -3,8 +3,8 @@ using TMPro;
 using UnityEngine;
 
 
-// EventHandler used by the select model UI.
-public class SelectModelEventHandler : MonoBehaviour
+// EventPublisher used by the select model UI.
+public class SelectModelEventPublisher : MonoBehaviour
 {
     // Referenced in the unity prefab editor inspector
     [SerializeField]

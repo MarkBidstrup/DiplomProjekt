@@ -4,12 +4,12 @@ using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 
-// Handles controller input.
-public class InputHandler : MonoBehaviour
+// Checks for controller input and publishes events.
+public class InputEventPublisher : MonoBehaviour
 {
     public event Action OnMenuButtonPressed;
-    public event Action OnleftPrimaryButtonPressed;
-    public event Action OnrightPrimaryButtonPressed;
+    public event Action OnLeftPrimaryButtonPressed;
+    public event Action OnRightPrimaryButtonPressed;
     private InputDevice leftHandDevice;
     private InputDevice rightHandDevice;
     private bool menuButtonWasPressed = false;
@@ -38,7 +38,7 @@ public class InputHandler : MonoBehaviour
         {
             if (leftPrimaryButtonPressed && !leftPrimaryButtonWasPressed && !createIssueUIOpen)
             {
-                OnleftPrimaryButtonPressed.Invoke();
+                OnLeftPrimaryButtonPressed.Invoke();
             }
             leftPrimaryButtonWasPressed = leftPrimaryButtonPressed;
         }
@@ -53,7 +53,7 @@ public class InputHandler : MonoBehaviour
         {
             if (rightPrimaryButtonPressed && !rightPrimaryButtonWasPressed && !createIssueUIOpen)
             {
-                OnrightPrimaryButtonPressed.Invoke();
+                OnRightPrimaryButtonPressed.Invoke();
             }
             rightPrimaryButtonWasPressed = rightPrimaryButtonPressed;
         }

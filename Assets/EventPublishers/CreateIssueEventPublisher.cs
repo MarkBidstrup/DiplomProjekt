@@ -3,8 +3,8 @@ using TMPro;
 using System;
 
 
-// EventHandler used by the create issue UI.
-public class CreateIssueEventHandler : MonoBehaviour
+// EventPublisher used by the create issue UI.
+public class CreateIssueEventPublisher : MonoBehaviour
 {
     // Referenced in the unity prefab editor inspector
     [SerializeField]

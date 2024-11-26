@@ -1867,7 +1867,7 @@ GameObject:
   - component: {fileID: 3714721409173385242}
   - component: {fileID: 3749695099218795037}
   m_Layer: 0
-  m_Name: SelectModelEventHandler
+  m_Name: SelectModelEventPublisher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2065,7 +2065,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &495608621419655057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2121,7 +2121,7 @@ MonoBehaviour:
   flagPrefab: {fileID: 0}
   plane: {fileID: 0}
   cameraTransform: {fileID: 0}
-  inputHandler: {fileID: 0}
+  inputEventPublisher: {fileID: 0}
   character: {fileID: 0}
 --- !u!1 &8751939213379416137
 GameObject:

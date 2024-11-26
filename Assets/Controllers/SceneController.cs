@@ -29,7 +29,7 @@ public class SceneController : MonoBehaviour
     [SerializeField]
     private Transform cameraTransform;
     [SerializeField]
-    private InputHandler inputHandler;
+    private InputEventPublisher inputEventPublisher;
     [SerializeField]
     private GameObject character;
 
@@ -40,11 +40,11 @@ public class SceneController : MonoBehaviour
     private GameObject currentViewIssues;
     private GameObject currentModel;
 
-    // Event handlers
-    private MainMenuEventHandler mainMenuEventHandler;
-    private CreateIssueEventHandler createIssueEventHandler;
-    private SelectModelEventHandler selectModelEventHandler;
-    private ViewIssuesEventHandler viewIssuesEventHandler;
+    // Event publishers
+    private MainMenuEventPublisher mainMenuEventPublisher;
+    private CreateIssueEventPublisher createIssueEventPublisher;
+    private SelectModelEventPublisher selectModelEventPublisher;
+    private ViewIssuesEventPublisher viewIssuesEventPublisher;
 
     private ModelController modelController;
     
@@ -60,11 +60,11 @@ public class SceneController : MonoBehaviour
     // Called when the scene initializes.
     private void Start()
     {
-        if (inputHandler != null)
+        if (inputEventPublisher != null)
         {
-            inputHandler.OnMenuButtonPressed += HandleMenuButtonPressedEvent;
-            inputHandler.OnleftPrimaryButtonPressed += HandleCreateIssueButtonPressedEvent;
-            inputHandler.OnrightPrimaryButtonPressed += HandleRightPrimaryButtonPressedEvent;
+            inputEventPublisher.OnMenuButtonPressed += HandleMenuButtonPressedEvent;
+            inputEventPublisher.OnLeftPrimaryButtonPressed += HandleCreateIssueButtonPressedEvent;
+            inputEventPublisher.OnRightPrimaryButtonPressed += HandleRightPrimaryButtonPressedEvent;
         }
 
         if (mainMenuPrefab != null)
@@ -80,24 +80,24 @@ public class SceneController : MonoBehaviour
         {
             SpawnUI(mainMenuPrefab);
             currentMainMenu.SetActive(true);
-            mainMenuEventHandler = currentMainMenu.GetComponentInChildren<MainMenuEventHandler>();
+            mainMenuEventPublisher = currentMainMenu.GetComponentInChildren<MainMenuEventPublisher>();
 
-            if (mainMenuEventHandler != null )
+            if (mainMenuEventPublisher != null )
             {
-                mainMenuEventHandler.createIssueButtonPressed += HandleCreateIssueButtonPressedEvent;
-                mainMenuEventHandler.selectModelButtonPressed += HandleSelectModelButtonPressedEvent;
-                mainMenuEventHandler.viewIssuesButtonPressed += HandleViewIssuesButtonPressedEvent;
+                mainMenuEventPublisher.createIssueButtonPressed += HandleCreateIssueButtonPressedEvent;
+                mainMenuEventPublisher.selectModelButtonPressed += HandleSelectModelButtonPressedEvent;
+                mainMenuEventPublisher.viewIssuesButtonPressed += HandleViewIssuesButtonPressedEvent;
             }
         }
         else
         {
-            mainMenuEventHandler = currentMainMenu.GetComponentInChildren<MainMenuEventHandler>();
+            mainMenuEventPublisher = currentMainMenu.GetComponentInChildren<MainMenuEventPublisher>();
 
-            if (mainMenuEventHandler != null)
+            if (mainMenuEventPublisher != null)
             {
-                mainMenuEventHandler.createIssueButtonPressed -= HandleCreateIssueButtonPressedEvent;
-                mainMenuEventHandler.selectModelButtonPressed -= HandleSelectModelButtonPressedEvent;
-                mainMenuEventHandler.viewIssuesButtonPressed -= HandleViewIssuesButtonPressedEvent;
+                mainMenuEventPublisher.createIssueButtonPressed -= HandleCreateIssueButtonPressedEvent;
+                mainMenuEventPublisher.selectModelButtonPressed -= HandleSelectModelButtonPressedEvent;
+                mainMenuEventPublisher.viewIssuesButtonPressed -= HandleViewIssuesButtonPressedEvent;
             }
 
             Destroy(currentMainMenu);
@@ -153,12 +153,12 @@ public class SceneController : MonoBehaviour
         Destroy(currentMainMenu);
         SpawnUI(createIssuePrefab);
 
-        createIssueEventHandler = currentCreateIssue.GetComponentInChildren<CreateIssueEventHandler>();
+        createIssueEventPublisher = currentCreateIssue.GetComponentInChildren<CreateIssueEventPublisher>();
 
-        if (createIssueEventHandler != null)
+        if (createIssueEventPublisher != null)
         {
-            createIssueEventHandler.OnCreateIssue += HandleCreateIssueEvent;
-            createIssueEventHandler.OnClose += HandleCloseEvent;
+            createIssueEventPublisher.OnCreateIssue += HandleCreateIssueEvent;
+            createIssueEventPublisher.OnClose += HandleCloseEvent;
         }
     }
 
@@ -167,11 +167,11 @@ public class SceneController : MonoBehaviour
     {
         Destroy(currentMainMenu);
         SpawnUI(selectModelPrefab);
-        selectModelEventHandler = currentSelectModel.GetComponentInChildren<SelectModelEventHandler>();
-        if (selectModelEventHandler != null)
+        selectModelEventPublisher = currentSelectModel.GetComponentInChildren<SelectModelEventPublisher>();
+        if (selectModelEventPublisher != null)
         {
-            selectModelEventHandler.OnSelectModel += HandleSelectModelEvent;
-            selectModelEventHandler.OnClose += HandleCloseEvent;
+            selectModelEventPublisher.OnSelectModel += HandleSelectModelEvent;
+            selectModelEventPublisher.OnClose += HandleCloseEvent;
         }
     }
 
@@ -184,14 +184,14 @@ public class SceneController : MonoBehaviour
         }
         Destroy(currentMainMenu);
         SpawnUI(viewIssuesPrefab);
-        viewIssuesEventHandler = currentViewIssues.GetComponentInChildren<ViewIssuesEventHandler>();
+        viewIssuesEventPublisher = currentViewIssues.GetComponentInChildren<ViewIssuesEventPublisher>();
 
-        if (viewIssuesEventHandler != null)
+        if (viewIssuesEventPublisher != null)
         {
-            viewIssuesEventHandler.OnUpdate += HandleUpdateEvent;
-            viewIssuesEventHandler.OnClose += HandleCloseEvent;
-            viewIssuesEventHandler.OnDelete += HandleDeleteEvent;
-            viewIssuesEventHandler.OnTeleport += HandleTeleportEvent;
+            viewIssuesEventPublisher.OnUpdate += HandleUpdateEvent;
+            viewIssuesEventPublisher.OnClose += HandleCloseEvent;
+            viewIssuesEventPublisher.OnDelete += HandleDeleteEvent;
+            viewIssuesEventPublisher.OnTeleport += HandleTeleportEvent;
         }
     }
 
@@ -375,22 +375,22 @@ public class SceneController : MonoBehaviour
         Debug.Log(prefabInstance.name);
         Destroy(prefabInstance);
 
-        if (prefabInstance == currentCreateIssue && createIssueEventHandler != null)
+        if (prefabInstance == currentCreateIssue && createIssueEventPublisher != null)
         {
-            createIssueEventHandler.OnCreateIssue -= HandleCreateIssueEvent;
-            createIssueEventHandler.OnClose -= HandleCloseEvent;
+            createIssueEventPublisher.OnCreateIssue -= HandleCreateIssueEvent;
+            createIssueEventPublisher.OnClose -= HandleCloseEvent;
         }
-        else if (prefabInstance == currentSelectModel && selectModelEventHandler != null)
+        else if (prefabInstance == currentSelectModel && selectModelEventPublisher != null)
         {
-            selectModelEventHandler.OnSelectModel -= HandleSelectModelEvent;
-            selectModelEventHandler.OnClose -= HandleCloseEvent;
+            selectModelEventPublisher.OnSelectModel -= HandleSelectModelEvent;
+            selectModelEventPublisher.OnClose -= HandleCloseEvent;
         }
-        else if (prefabInstance == currentViewIssues && viewIssuesEventHandler != null)
+        else if (prefabInstance == currentViewIssues && viewIssuesEventPublisher != null)
         {
-            viewIssuesEventHandler.OnUpdate -= HandleUpdateEvent;
-            viewIssuesEventHandler.OnClose -= HandleCloseEvent;
-            viewIssuesEventHandler.OnDelete -= HandleDeleteEvent;
-            viewIssuesEventHandler.OnTeleport -= HandleTeleportEvent;
+            viewIssuesEventPublisher.OnUpdate -= HandleUpdateEvent;
+            viewIssuesEventPublisher.OnClose -= HandleCloseEvent;
+            viewIssuesEventPublisher.OnDelete -= HandleDeleteEvent;
+            viewIssuesEventPublisher.OnTeleport -= HandleTeleportEvent;
         }
     }
 

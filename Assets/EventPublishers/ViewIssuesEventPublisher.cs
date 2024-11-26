@@ -3,7 +3,7 @@ using TMPro;
 using System;
 
 
-public class ViewIssuesEventHandler : MonoBehaviour
+public class ViewIssuesEventPublisher : MonoBehaviour
 {
     // Referenced in the unity prefab editor inspector
     [SerializeField]
