@@ -5,9 +5,24 @@ using System;
 
 
 // Class is used to control model state.
-public class ModelController : MonoBehaviour
+public class ModelController
 {
     private Model model;
+    private static ModelController _instance;
+
+    private ModelController() { }
+
+    public static ModelController Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new ModelController();
+            }
+            return _instance;
+        }
+    }
 
     // Initializes model.
     public void InitializeModel(string modelName)

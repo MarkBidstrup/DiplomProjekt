@@ -21,7 +21,7 @@ public class ViewIssuesManager : MonoBehaviour
 
     private void Awake()
     {
-        modelController = GameObject.FindWithTag("ModelController").GetComponent<ModelController>();
+        modelController = ModelController.Instance;
         selectIssue.onValueChanged.AddListener(OnDropdownValueChanged);
         AssignedTo.onValueChanged.AddListener(OnAssignedToValueChanged);
         DropdownUtil.SetDropdownOptions(GetIssueSubjects(), selectIssue);

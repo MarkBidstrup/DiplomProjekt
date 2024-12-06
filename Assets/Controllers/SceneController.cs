@@ -54,7 +54,7 @@ public class SceneController : MonoBehaviour
 
     private void Awake()
     {
-        modelController = GameObject.FindWithTag("ModelController").GetComponent<ModelController>();
+        modelController = ModelController.Instance;
     }
 
     // Called when the scene initializes.
