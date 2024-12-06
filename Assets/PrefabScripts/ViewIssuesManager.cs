@@ -23,7 +23,6 @@ public class ViewIssuesManager : MonoBehaviour
     {
         modelController = ModelController.Instance;
         selectIssue.onValueChanged.AddListener(OnDropdownValueChanged);
-        AssignedTo.onValueChanged.AddListener(OnAssignedToValueChanged);
         DropdownUtil.SetDropdownOptions(GetIssueSubjects(), selectIssue);
         DropdownUtil.SetDropdownOptions(AssignedToOptions.Options, AssignedTo);
         TMP_Dropdown.OptionData dropdownTemplateText = new TMP_Dropdown.OptionData("Select Issue");
@@ -48,16 +47,5 @@ public class ViewIssuesManager : MonoBehaviour
         description.text = flagList[indexWithOffset].Description;
         int assigneeIndex = AssignedToOptions.Options.IndexOf(flagList[indexWithOffset].AssignedTo);
         AssignedTo.value = assigneeIndex;
-    }
-
-    private void OnAssignedToValueChanged(int index)
-    {
-        List<Issue> flagList = modelController.GetModel().Issues;
-
-        int selectedIssueIndex = selectIssue.value - 1; // Offset needed because of template option
-        if (selectedIssueIndex >= 0 && selectedIssueIndex < flagList.Count)
-        {
-            flagList[selectedIssueIndex].AssignedTo = AssignedToOptions.Options[index];
-        }
     }
 }

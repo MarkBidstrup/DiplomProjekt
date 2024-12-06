@@ -92,6 +92,27 @@
       "DueDate": "5/9-2024",
       "AssignedTo": "Broer og konstruktioner / Bridges and Structures",
       "Description": "Broen skal ikke være en del af modellen."
+    },
+    {
+      "IssueId": "1a5c14c5-f89b-4c78-98b7-8f02b67d5b2e",
+      "Location": {
+        "x": 0.160247669,
+        "y": 121.714668,
+        "z": 0.9721721,
+        "normalized": {
+          "x": 0.00131654157,
+          "y": 0.9999672,
+          "z": 0.007987042,
+          "magnitude": 1.0,
+          "sqrMagnitude": 0.99999994
+        },
+        "magnitude": 121.718658,
+        "sqrMagnitude": 14815.4316
+      },
+      "Subject": "test",
+      "DueDate": "",
+      "AssignedTo": "BIM/IKT / BIM/ICT",
+      "Description": ""
     }
   ]
 }
