@@ -10,11 +10,13 @@ public class InputEventPublisher : MonoBehaviour
     public event Action OnMenuButtonPressed;
     public event Action OnLeftPrimaryButtonPressed;
     public event Action OnRightPrimaryButtonPressed;
+    public event Action OnRightSecondaryButtonPressed;
     private InputDevice leftHandDevice;
     private InputDevice rightHandDevice;
     private bool menuButtonWasPressed = false;
     private bool leftPrimaryButtonWasPressed = false;
     private bool rightPrimaryButtonWasPressed = false;
+    private bool rightSecondaryButtonWasPressed = false;
     private bool createIssueUIOpen = false;
 
     void Update()
@@ -56,6 +58,15 @@ public class InputEventPublisher : MonoBehaviour
                 OnRightPrimaryButtonPressed.Invoke();
             }
             rightPrimaryButtonWasPressed = rightPrimaryButtonPressed;
+        }
+        bool rightSecondaryButtonPressed = false;
+        if (rightHandDevice.isValid && rightHandDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out rightSecondaryButtonPressed))
+        {
+            if (rightSecondaryButtonPressed && !rightSecondaryButtonWasPressed && !createIssueUIOpen)
+            {
+                OnRightSecondaryButtonPressed.Invoke();
+            }
+            rightSecondaryButtonWasPressed = rightSecondaryButtonPressed;
         }
     }
 }

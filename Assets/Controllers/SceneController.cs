@@ -65,6 +65,7 @@ public class SceneController : MonoBehaviour
             inputEventPublisher.OnMenuButtonPressed += HandleMenuButtonPressedEvent;
             inputEventPublisher.OnLeftPrimaryButtonPressed += HandleCreateIssueButtonPressedEvent;
             inputEventPublisher.OnRightPrimaryButtonPressed += HandleRightPrimaryButtonPressedEvent;
+            inputEventPublisher.OnRightSecondaryButtonPressed += ReinitializeXRRig;
         }
 
         if (mainMenuPrefab != null)
@@ -374,7 +375,6 @@ public class SceneController : MonoBehaviour
     {
         Debug.Log(prefabInstance.name);
         Destroy(prefabInstance);
-
         if (prefabInstance == currentCreateIssue && createIssueEventPublisher != null)
         {
             createIssueEventPublisher.OnCreateIssue -= HandleCreateIssueEvent;

@@ -113,6 +113,27 @@
       "DueDate": "",
       "AssignedTo": "BIM/IKT / BIM/ICT",
       "Description": ""
+    },
+    {
+      "IssueId": "87962ff4-b824-4e2d-bb2a-6dc9f34bde71",
+      "Location": {
+        "x": 0.139786229,
+        "y": 121.32547,
+        "z": 6.89115238,
+        "normalized": {
+          "x": 0.00115030422,
+          "y": 0.9983902,
+          "z": 0.0567074567,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 121.521095,
+        "sqrMagnitude": 14767.377
+      },
+      "Subject": "fgfgf",
+      "DueDate": "",
+      "AssignedTo": "Afvanding / Drainage",
+      "Description": ""
     }
   ]
 }
