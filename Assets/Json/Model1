@@ -106,6 +106,27 @@
       "DueDate": "345345",
       "AssignedTo": "Fremmede ledninger / Utilities",
       "Description": "dfgdfgfdg"
+    },
+    {
+      "IssueId": "712f6d30-7bb1-43d1-9e7b-c825f09c644d",
+      "Location": {
+        "x": -0.34092164,
+        "y": 120.868858,
+        "z": 13.5327463,
+        "normalized": {
+          "x": -0.00280306581,
+          "y": 0.993786633,
+          "z": 0.111266561,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 121.624557,
+        "sqrMagnitude": 14792.5322
+      },
+      "Subject": "ete",
+      "DueDate": "",
+      "AssignedTo": "Afvanding / Drainage",
+      "Description": ""
     }
   ]
 }
