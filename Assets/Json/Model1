@@ -1,139 +1,111 @@
 {
-  "ModelId": "6af848d9-0be9-4cfc-953c-def9359a98bc",
+  "ModelId": "91009d8b-401c-496c-98b8-8e6704bf7b68",
   "ModelName": "Model1",
   "Issues": [
     {
-      "IssueId": "a4f75c9b-2b52-4968-b8a1-4352ace74512",
+      "IssueId": "66ed40be-f419-41e7-a9a3-9a51b586f486",
       "Location": {
-        "x": -36.2855453,
-        "y": 111.7289,
-        "z": 50.4092369,
+        "x": 83.22408,
+        "y": 111.883507,
+        "z": 73.405304,
         "normalized": {
-          "x": -0.283852875,
-          "y": 0.8740276,
-          "z": 0.394339025,
+          "x": 0.528127432,
+          "y": 0.7099958,
+          "z": 0.465818971,
+          "magnitude": 1.0,
+          "sqrMagnitude": 0.99999994
+        },
+        "magnitude": 157.583328,
+        "sqrMagnitude": 24832.5059
+      },
+      "Subject": "Missing objects",
+      "DueDate": "06/07-2025",
+      "AssignedTo": "Sikringsteknik projektering / Signal",
+      "Description": "There are missing objects here. The missing object is a pole"
+    },
+    {
+      "IssueId": "eb890ce3-db5a-4cdd-9573-66b919baadc9",
+      "Location": {
+        "x": -23.5688171,
+        "y": 106.53125,
+        "z": 52.7374878,
+        "normalized": {
+          "x": -0.194487348,
+          "y": 0.879084468,
+          "z": 0.4351841,
           "magnitude": 1.0,
           "sqrMagnitude": 1.0
         },
-        "magnitude": 127.83223,
-        "sqrMagnitude": 16341.0781
+        "magnitude": 121.184319,
+        "sqrMagnitude": 14685.6387
       },
-      "Subject": "hvid dør",
-      "DueDate": "2/2-25",
+      "Subject": "Non-intended gap",
+      "DueDate": "11/07-2025",
       "AssignedTo": "Tværgående / Cross disciplinary",
-      "Description": "Der er noget galt med farven på døren. Den skulle have været blå."
+      "Description": "There is a non-intented gap between the two models"
     },
     {
-      "IssueId": "7ed13765-e195-4f10-aaab-e5ef46070866",
+      "IssueId": "a1a0d2e4-20bb-4435-a00c-c89eb57ebb88",
       "Location": {
-        "x": 20.5654011,
-        "y": 107.159416,
-        "z": 69.53667,
+        "x": -56.395813,
+        "y": 108.83136,
+        "z": 5.04621124,
         "normalized": {
-          "x": 0.158942848,
-          "y": 0.8281979,
-          "z": 0.537424743,
-          "normalized": {
-            "x": 0.158942863,
-            "y": 0.828197956,
-            "z": 0.5374248,
-            "magnitude": 1.0,
-            "sqrMagnitude": 1.00000012
-          },
-          "magnitude": 0.99999994,
-          "sqrMagnitude": 0.99999994
-        },
-        "magnitude": 129.388657,
-        "sqrMagnitude": 16741.4238
-      },
-      "Subject": "Manglende cykel rampe",
-      "DueDate": "3/4-2025",
-      "AssignedTo": "Arbejdsmiljø / Working environment",
-      "Description": "Der mangler cykel rampe på trappen."
-    },
-    {
-      "IssueId": "aa7a60dc-5885-425e-a01f-115ec8171d6e",
-      "Location": {
-        "x": 196.0944,
-        "y": 109.465851,
-        "z": 98.19939,
-        "normalized": {
-          "x": 0.8000262,
-          "y": 0.446598917,
-          "z": 0.400633961,
-          "magnitude": 1.0,
-          "sqrMagnitude": 1.0
-        },
-        "magnitude": 245.109985,
-        "sqrMagnitude": 60078.9063
-      },
-      "Subject": "Skæv låge",
-      "DueDate": "7/7-2024",
-      "AssignedTo": "Vejdesign og -teknik / Road design and -equipment",
-      "Description": "Lågen er skæv."
-    },
-    {
-      "IssueId": "0df5ed1d-31be-412f-9d4b-dee09469e5d5",
-      "Location": {
-        "x": 339.9161,
-        "y": 113.330727,
-        "z": 147.975922,
-        "normalized": {
-          "x": 0.8768309,
-          "y": 0.292342365,
-          "z": 0.3817114,
-          "magnitude": 1.0,
-          "sqrMagnitude": 1.0
-        },
-        "magnitude": 387.6644,
-        "sqrMagnitude": 150283.688
-      },
-      "Subject": "Bro i model",
-      "DueDate": "5/9-2024",
-      "AssignedTo": "Broer og konstruktioner / Bridges and Structures",
-      "Description": "Broen skal ikke være en del af modellen."
-    },
-    {
-      "IssueId": "1a5c14c5-f89b-4c78-98b7-8f02b67d5b2e",
-      "Location": {
-        "x": 0.160247669,
-        "y": 121.714668,
-        "z": 0.9721721,
-        "normalized": {
-          "x": 0.00131654157,
-          "y": 0.9999672,
-          "z": 0.007987042,
+          "x": -0.459701031,
+          "y": 0.8871206,
+          "z": 0.0411333442,
           "magnitude": 1.0,
           "sqrMagnitude": 0.99999994
         },
-        "magnitude": 121.718658,
-        "sqrMagnitude": 14815.4316
+        "magnitude": 122.679329,
+        "sqrMagnitude": 15050.2168
       },
-      "Subject": "test",
-      "DueDate": "",
-      "AssignedTo": "BIM/IKT / BIM/ICT",
-      "Description": ""
-    },
-    {
-      "IssueId": "87962ff4-b824-4e2d-bb2a-6dc9f34bde71",
-      "Location": {
-        "x": 0.139786229,
-        "y": 121.32547,
-        "z": 6.89115238,
-        "normalized": {
-          "x": 0.00115030422,
-          "y": 0.9983902,
-          "z": 0.0567074567,
-          "magnitude": 1.0,
-          "sqrMagnitude": 1.0
-        },
-        "magnitude": 121.521095,
-        "sqrMagnitude": 14767.377
-      },
-      "Subject": "fgfgf",
+      "Subject": "Wrong material",
       "DueDate": "",
       "AssignedTo": "Afvanding / Drainage",
       "Description": ""
+    },
+    {
+      "IssueId": "a57328a5-eed6-4b7f-925c-3fed80fd3bae",
+      "Location": {
+        "x": 13.29233,
+        "y": 119.267372,
+        "z": 40.19961,
+        "normalized": {
+          "x": 0.105028,
+          "y": 0.942379057,
+          "z": 0.317633182,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 126.559868,
+        "sqrMagnitude": 16017.4
+      },
+      "Subject": "etert",
+      "DueDate": "ertert",
+      "AssignedTo": "Fremmede ledninger / Utilities",
+      "Description": "ertert"
+    },
+    {
+      "IssueId": "9d22e0ad-346c-412e-9ace-c5379b522ce9",
+      "Location": {
+        "x": 28.1538677,
+        "y": 119.9573,
+        "z": 54.1380577,
+        "normalized": {
+          "x": 0.209189087,
+          "y": 0.891307652,
+          "z": 0.402257025,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 134.585739,
+        "sqrMagnitude": 18113.3223
+      },
+      "Subject": "345345",
+      "DueDate": "345345",
+      "AssignedTo": "Fremmede ledninger / Utilities",
+      "Description": "dfgdfgfdg"
     }
   ]
 }

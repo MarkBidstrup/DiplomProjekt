@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
+/// <summary>
+/// Manages the assigned to dropdown menu options of the create issue UI.
+/// </summary>
 public class CreateIssueManager : MonoBehaviour
 {
     [SerializeField]

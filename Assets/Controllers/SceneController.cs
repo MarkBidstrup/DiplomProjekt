@@ -1,16 +1,13 @@
 ﻿using Dummiesman;
 using UnityEngine;
-using UnityEngine.XR;
-using UnityEngine.XR.Management;
-using UnityEngine.XR.Interaction.Toolkit.Locomotion;
-using UnityEngine.UI;
 using System;
-using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Movement;
-using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.InputSystem;
 
 
-// Responsible for controlling graphical elements and events from UI.
+/// <summary>
+/// Controls the logic of GameObjects in the Unity scene.
+/// </summary>
 public class SceneController : MonoBehaviour
 {
     // Referenced in the unity editor inspector
@@ -32,6 +29,8 @@ public class SceneController : MonoBehaviour
     private InputEventPublisher inputEventPublisher;
     [SerializeField]
     private GameObject character;
+    [SerializeField]
+    private InputActionReference leftInputAction;
 
     // current 3D objects
     private GameObject currentMainMenu;
@@ -52,12 +51,18 @@ public class SceneController : MonoBehaviour
     private string currentModelName;
     private bool isTurbo = false;
 
+
+    /// <summary>
+    /// Gets reference to model controller.
+    /// </summary>
     private void Awake()
     {
         modelController = ModelController.Instance;
     }
 
-    // Called when the scene initializes.
+    /// <summary>
+    /// Subscribes to input events and makes sure the main menu is not active.
+    /// </summary>
     private void Start()
     {
         if (inputEventPublisher != null)
@@ -65,7 +70,6 @@ public class SceneController : MonoBehaviour
             inputEventPublisher.OnMenuButtonPressed += HandleMenuButtonPressedEvent;
             inputEventPublisher.OnLeftPrimaryButtonPressed += HandleCreateIssueButtonPressedEvent;
             inputEventPublisher.OnRightPrimaryButtonPressed += HandleRightPrimaryButtonPressedEvent;
-            inputEventPublisher.OnRightSecondaryButtonPressed += ReinitializeXRRig;
         }
 
         if (mainMenuPrefab != null)
@@ -74,7 +78,9 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    // Toggles the main menu UI and subscribes/unsubscribes to menu events.
+    /// <summary>
+    /// Toggles the main menu UI and subscribes/unsubscribes to menu events.
+    /// </summary>
     private void HandleMenuButtonPressedEvent()
     {
         if (currentMainMenu == null)
@@ -101,11 +107,14 @@ public class SceneController : MonoBehaviour
                 mainMenuEventPublisher.viewIssuesButtonPressed -= HandleViewIssuesButtonPressedEvent;
             }
 
-            Destroy(currentMainMenu);
+            DestroyUI(currentMainMenu);
         }
     }
 
-    // Spawns UI object in the scene.
+    /// <summary>
+    /// Instantiates UI object.
+    /// </summary>
+    /// <param name="UIPrefab">The prefab of the UI to be instantiated.</param>
     private void SpawnUI(GameObject UIPrefab)
     {
         Vector3 spawnPosition = cameraTransform.position + cameraTransform.forward * spawnDistance;
@@ -144,14 +153,16 @@ public class SceneController : MonoBehaviour
         UIPrefab.SetActive(true);
     }
 
-    // Runs when create issue button is pressed in the main menu UI.
+    /// <summary>
+    /// Destroys current main menu, instantiates the create issue prefab and subscribes to the events of the create issue event publisher.
+    /// </summary>
     private void HandleCreateIssueButtonPressedEvent()
     {
         if (modelController.GetModel() == null)
         {
             return;
         }
-        Destroy(currentMainMenu);
+        DestroyUI(currentMainMenu);
         SpawnUI(createIssuePrefab);
 
         createIssueEventPublisher = currentCreateIssue.GetComponentInChildren<CreateIssueEventPublisher>();
@@ -163,10 +174,12 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    // Runs when select model button is pressed in the main menu UI.
+    /// <summary>
+    /// Destroys current main menu, instantiates the select model prefab and subscribes to the events of the select model event publisher.
+    /// </summary>
     private void HandleSelectModelButtonPressedEvent()
     {
-        Destroy(currentMainMenu);
+        DestroyUI(currentMainMenu);
         SpawnUI(selectModelPrefab);
         selectModelEventPublisher = currentSelectModel.GetComponentInChildren<SelectModelEventPublisher>();
         if (selectModelEventPublisher != null)
@@ -176,14 +189,16 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    // Runs when view issues button is pressed in the main menu UI.
+    /// <summary>
+    /// Destroys current main menu, instantiates the view issues prefab and subscribes to the events of the view issues event publisher.
+    /// </summary>
     private void HandleViewIssuesButtonPressedEvent()
     {
         if (modelController.GetModel() == null)
         {
             return;
         }
-        Destroy(currentMainMenu);
+        DestroyUI(currentMainMenu);
         SpawnUI(viewIssuesPrefab);
         viewIssuesEventPublisher = currentViewIssues.GetComponentInChildren<ViewIssuesEventPublisher>();
 
@@ -196,6 +211,11 @@ public class SceneController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Destroys flag prefab, deletes issue by index and destroys current view issues prefab.
+    /// </summary>
+    /// <param name="index">The issue index.</param>
+    /// <param name="prefabInstance">The prefab instance.</param>
     private void HandleDeleteEvent(int index, GameObject prefabInstance)
     {
         if (index > 0)
@@ -204,24 +224,45 @@ public class SceneController : MonoBehaviour
             DestroyFlag(indexWithOffset);
             modelController.DeleteIssue(indexWithOffset, currentModelName);
         }
-        Destroy(currentViewIssues);
+
+        DestroyUI(currentViewIssues);
     }
 
+    /// <summary>
+    /// Updates issue by index and destroys current view issues prefab.
+    /// </summary>
+    /// <param name="index">The issue index.</param>
+    /// <param name="subject">The issue subject.</param>
+    /// <param name="dueDate">The issue due date.</param>
+    /// <param name="assignedTo">The issue assignee.</param>
+    /// <param name="description">The issue description.</param>
     private void HandleUpdateEvent(int index, string subject, string dueDate, string assignedTo, string description)
     {
         int indexWithOffset = index - 1; // Offset needed because of template option
         modelController.UpdateIssue(indexWithOffset, subject, dueDate, assignedTo, description, currentModelName);
-        Destroy(currentViewIssues);
+        DestroyUI(currentViewIssues);
     }
 
-    // Runs when the create issue button is pressed in the create issue UI.
+    /// <summary>
+    /// Instantiates flag prefab and destroys the current create issue prefab.
+    /// </summary>
+    /// <param name="subject">The issue subject.</param>
+    /// <param name="dueDate">The issue due date.</param>
+    /// <param name="assignedTo">The issue assignee.</param>
+    /// <param name="description">The issue description.</param>
     private void HandleCreateIssueEvent(string subject, string dueDate, string assignedTo, string description)
     {
         SpawnFlag(subject, dueDate, assignedTo, description);
-        Destroy(currentCreateIssue);
+        DestroyUI(currentCreateIssue);
     }
 
-    // Spawns a 3D flag object in the scene and adds a flag to the model.
+    /// <summary>
+    /// Instantiates flag prefab and adds new issue to the model's list of issues.
+    /// </summary>
+    /// <param name="subject">The issue subject.</param>
+    /// <param name="dueDate">The issue due date.</param>
+    /// <param name="assignedTo">The issue assignee.</param>
+    /// <param name="description">The issue description.</param>
     private void SpawnFlag(string subject, string dueDate, string assignedTo, string description)
     {
         if (flagPrefab != null && currentModelName != null)
@@ -236,6 +277,10 @@ public class SceneController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Destroys flag prefab by index.
+    /// </summary>
+    /// <param name="index">The issue index.</param>
     private void DestroyFlag(int index)
     {
         Issue issueToDelete = modelController.GetModel().Issues[index];
@@ -251,10 +296,10 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    // Runs when select button is pressed in the select model UI.
-    // Destroys all flags in the scene.
-    // Imports model in runtime with OBJLoader.
-    // Instantiates flags in the loaded model to the scene.
+    /// <summary>
+    /// Imports 3D model at runtime, assigns materials to the model, moves user's viewpoint to the highest value of the y-axis of the model, initializes model and instantiates flag prefabs associated with the model. 
+    /// </summary>
+    /// <param name="index">The issue index.</param>
     private void HandleSelectModelEvent(string modelName)
     {
         if (modelName == null)
@@ -280,17 +325,13 @@ public class SceneController : MonoBehaviour
         MoveCharacterToModelHighestPoint(currentModel);
         modelController.InitializeModel(modelName);
         InstantiateFlags();
-        ReinitializeXRRig();
+        leftInputAction.action.Enable(); // Hack to prevent disabling of Unity input actions, which will prevent user locomotion movement.
     }
 
-    // Reinitialize XR Rig to prevent locomotion to break
-    private void ReinitializeXRRig()
-    {
-        character.SetActive(false);
-        character.SetActive(true);
-    }
-
-    // Moves the character to the highest point in the model
+    /// <summary>
+    /// Moves the character to the highest value of the y-axis in the model.
+    /// </summary>
+    /// <param name="model">The current model.</param>
     private void MoveCharacterToModelHighestPoint(GameObject model)
     {
         float highestY = CalculateHighestY(model);
@@ -300,7 +341,10 @@ public class SceneController : MonoBehaviour
         character.transform.position = playerPosition;
     }
 
-    // Calculates the highest y value of the model
+    /// <summary>
+    /// Calculates the highest y value of the model.
+    /// </summary>
+    /// <param name="model">The current model.</param>
     private float CalculateHighestY(GameObject model)
     {
         Renderer[] renderers = model.GetComponentsInChildren<Renderer>();
@@ -315,10 +359,13 @@ public class SceneController : MonoBehaviour
         return highestY;
     }
 
-    // Assigns material base color to the 3D models materials.
-    private void AssignColorToMaterialInModel(GameObject obj)
+    /// <summary>
+    /// Assigns material base color to the current models materials.
+    /// </summary>
+    /// <param name="model">The current model.</param>
+    private void AssignColorToMaterialInModel(GameObject model)
     {
-        Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
+        Renderer[] renderers = model.GetComponentsInChildren<Renderer>();
         foreach (var renderer in renderers)
         {
             for (int i = 0;i < renderer.materials.Length;i++)
@@ -331,7 +378,9 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    // Destroys all flags in the scene.
+    /// <summary>
+    /// Destroys all flags.
+    /// </summary>
     private void DestroyFlags()
     {
         GameObject[] flags = GameObject.FindGameObjectsWithTag("Flag");
@@ -341,7 +390,9 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    // Instantiates issues from the model as flag objects in the scene.
+    /// <summary>
+    /// Instantiates flags associated with the issues of the model.
+    /// </summary>
     private void InstantiateFlags()
     {
         if (modelController.GetModel().Issues == null)
@@ -359,22 +410,28 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    // Handles the teleport event
+    /// <summary>
+    /// Moves the character to the location of an issue by index and destroys the UI prefab.
+    /// </summary>
+    /// <param name="index">The issue index.</param>
+    /// <param name="prefabInstance">The UI prefab.</param>
     private void HandleTeleportEvent(int index, GameObject prefabInstance)
     {
         if (index > 0)
         {
             Issue issueToTeleport = modelController.GetModel().Issues[index-1];
             character.transform.position = issueToTeleport.Location;
-            Destroy(prefabInstance);
+            DestroyUI(prefabInstance);
         }
     }
 
-    // Handles the event triggered when a close button is pressed
+    /// <summary>
+    /// Destroys the UI prefab and unsubscribes to the events associated with the UI prefab.
+    /// </summary>
+    /// <param name="prefabInstance">The UI prefab.</param>
     private void HandleCloseEvent(GameObject prefabInstance)
     {
-        Debug.Log(prefabInstance.name);
-        Destroy(prefabInstance);
+        DestroyUI(prefabInstance);
         if (prefabInstance == currentCreateIssue && createIssueEventPublisher != null)
         {
             createIssueEventPublisher.OnCreateIssue -= HandleCreateIssueEvent;
@@ -394,8 +451,9 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    // Handles the event triggered when the right primary button is pressed
-    // Toggles turbo move speed
+    /// <summary>
+    /// Toggles movement speed boost.
+    /// </summary>
     private void HandleRightPrimaryButtonPressedEvent()
     {
         ContinuousMoveProvider moveProvider = FindObjectOfType<ContinuousMoveProvider>();
@@ -412,5 +470,15 @@ public class SceneController : MonoBehaviour
                 isTurbo = false;
             }
         }
+    }
+
+    /// <summary>
+    /// Destroys the UI prefab and enables the left input action.
+    /// </summary>
+    /// <param name="UIPrefab">The UI prefab.</param>
+    private void DestroyUI(GameObject UIPrefab)
+    {
+        Destroy(UIPrefab);
+        leftInputAction.action.Enable(); // Hack to prevent disabling of Unity input actions, which will prevent user locomotion movement.
     }
 }

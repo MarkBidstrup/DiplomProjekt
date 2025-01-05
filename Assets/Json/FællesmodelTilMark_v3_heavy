@@ -64,6 +64,41 @@
       "DueDate": "12/6-2024",
       "AssignedTo": "Natur og miljø / Environment",
       "Description": "Indgangens frontparti er ikke i korrekt form."
+    },
+    {
+      "IssueId": "311df60d-010d-4a59-9dcd-5ffd92821021",
+      "Location": {
+        "x": -38.41753,
+        "y": 107.581726,
+        "z": -67.96459,
+        "normalized": {
+          "x": -0.2890177,
+          "y": 0.8093447,
+          "z": -0.5113023,
+          "normalized": {
+            "x": -0.289017677,
+            "y": 0.8093446,
+            "z": -0.511302233,
+            "normalized": {
+              "x": -0.2890177,
+              "y": 0.809344649,
+              "z": -0.5113023,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 0.99999994,
+            "sqrMagnitude": 0.9999999
+          },
+          "magnitude": 1.00000012,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 132.924484,
+        "sqrMagnitude": 17668.92
+      },
+      "Subject": "",
+      "DueDate": "",
+      "AssignedTo": "Afvanding / Drainage",
+      "Description": ""
     }
   ]
 }

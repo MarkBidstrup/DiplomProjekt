@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
+/// <summary>
+/// Utility class used to set dropdown menu options.
+/// </summary>
 public static class DropdownUtil
 {
+    /// <summary>
+    /// Clears and sets dropdown menu options.
+    /// </summary>
+    /// <param name="options">The list of dropdown menu options.</param>
+    /// <param name="dropdown">The dropdown menu.</param>
     public static void SetDropdownOptions(List<string> options, TMP_Dropdown dropdown)
     {
         if (options == null)

@@ -1,11 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
+
+/// <summary>
+/// Manages select issue dropdown menu options and assigned to dropdown menu options of the view issues UI.
+/// </summary>
 public class ViewIssuesManager : MonoBehaviour
 {
     [SerializeField]
@@ -19,6 +20,9 @@ public class ViewIssuesManager : MonoBehaviour
 
     private ModelController modelController;
 
+    /// <summary>
+    /// Manages select issue dropdown menu options and assigned to dropdown menu options and inserts template text to the first select issue dropdown menu option.
+    /// </summary>
     private void Awake()
     {
         modelController = ModelController.Instance;
@@ -29,16 +33,24 @@ public class ViewIssuesManager : MonoBehaviour
         selectIssue.options.Insert(0, dropdownTemplateText);
     }
 
+    /// <summary>
+    /// Gets the issue subject string values.
+    /// </summary>
+    /// <returns>A list with issue subject string values</returns>
     private List<string> GetIssueSubjects()
     {
         if (modelController.GetModel() == null)
         {
             return null;
         }
-        List<Issue> flagList = modelController.GetModel().Issues;
-        return flagList.Select(flag => flag.Subject).ToList();
+        List<Issue> issueList = modelController.GetModel().Issues;
+        return issueList.Select(flag => flag.Subject).ToList();
     }
 
+    /// <summary>
+    /// Updates input field text when the string value of the select issue dropdown menu option has changed by option index.
+    /// </summary>
+    /// <param name="index">The select issue dropdown menu option index</param>
     private void OnDropdownValueChanged(int index)
     {
         int indexWithOffset = index - 1; // Offset needed because of template option

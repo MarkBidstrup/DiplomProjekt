@@ -1,5 +1,48 @@
 {
   "ModelId": "9db5843b-e21a-494a-84c6-ddf338d0bbe1",
   "ModelName": "FællesmodelTilMark",
-  "Issues": []
+  "Issues": [
+    {
+      "IssueId": "95bbea2a-e1aa-4314-8e88-e0740724cd46",
+      "Location": {
+        "x": 4.34560633,
+        "y": 83.288,
+        "z": 26.55925,
+        "normalized": {
+          "x": 0.0496481247,
+          "y": 0.9515572,
+          "z": 0.303436816,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 87.52811,
+        "sqrMagnitude": 7661.16943
+      },
+      "Subject": "",
+      "DueDate": "",
+      "AssignedTo": "Afvanding / Drainage",
+      "Description": ""
+    },
+    {
+      "IssueId": "6606b773-8bdd-443f-a849-bdaeb3e65a37",
+      "Location": {
+        "x": -80.0980453,
+        "y": 81.81506,
+        "z": 19.0483246,
+        "normalized": {
+          "x": -0.6900841,
+          "y": 0.7048771,
+          "z": 0.16411069,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 116.069977,
+        "sqrMagnitude": 13472.24
+      },
+      "Subject": "",
+      "DueDate": "",
+      "AssignedTo": "Afvanding / Drainage",
+      "Description": ""
+    }
+  ]
 }

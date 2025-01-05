@@ -1,10 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
+
+/// <summary>
+/// Manages select model dropdown menu options of the select model UI.
+/// </summary>
 public class SelectModelManager : MonoBehaviour
 {
     [SerializeField]
@@ -17,6 +19,11 @@ public class SelectModelManager : MonoBehaviour
         DropdownUtil.SetDropdownOptions(modelNames, dropdown);
     }
 
+    /// <summary>
+    /// Scans a directory of all files with the .obj file format.
+    /// </summary>
+    /// <param name="path">The directory path.</param>
+    /// <returns>A list of string values of the filenames found.</returns>
     private List<string> GetModelNames(string path)
     {
         List<string> fileNames = new List<string>();

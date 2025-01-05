@@ -3,8 +3,9 @@ using UnityEngine;
 using System.IO;
 using System;
 
-
-// Class is used to control model state.
+/// <summary>
+/// Controls the model logic.
+/// </summary>
 public class ModelController
 {
     private Model model;
@@ -24,7 +25,10 @@ public class ModelController
         }
     }
 
-    // Initializes model.
+    /// <summary>
+    /// Initializes model.
+    /// </summary>
+    /// <param name="modelName">The model name.</param>
     public void InitializeModel(string modelName)
     {
         if (ModelExists(modelName))
@@ -38,6 +42,16 @@ public class ModelController
         }
     }
 
+    /// <summary>
+    /// Adds an issue to the model's list of issues.
+    /// </summary>
+    /// <param name="issueId">The issue Guid.</param>
+    /// <param name="subject">The issue subject.</param>
+    /// <param name="dueDate">The issue due date.</param>
+    /// <param name="assignedTo">The issue assignee.</param>
+    /// <param name="description">The issue description.</param>
+    /// <param name="spawnPosition">The issue location.</param>
+    /// <param name="modelName">The model name, which the issue is associated with.</param>
     public void AddIssueToModel(Guid issueId, string subject, string dueDate, string assignedTo, string description, Vector3 spawnPosition, string modelName)
     {
         Issue issue = new Issue(issueId, spawnPosition, subject, dueDate, assignedTo, description);
@@ -48,25 +62,44 @@ public class ModelController
         JsonUtil.Serialize(model, modelName);
     }
 
+    /// <summary>
+    /// Updates an issue by index in the models list of issues.
+    /// </summary>
+    /// <param name="index">The issue index.</param>
+    /// <param name="subject">The issue subject.</param>
+    /// <param name="dueDate">The issue due date.</param>
+    /// <param name="assignedTo">The issue assignee.</param>
+    /// <param name="description">The issue description.</param>
+    /// <param name="modelName">The model name, which the issue is associated with.</param>
     public void UpdateIssue(int index, string subject, string dueDate, string assignedTo, string description, string modelName)
     {
         model.UpdateIssue(index, subject, dueDate, assignedTo, description);
         JsonUtil.Serialize(model, modelName);
     }
 
+    /// <summary>
+    /// Deletes an issue by index in the models list of issues.
+    /// </summary>
+    /// <param name="index">The issue index.</param>
+    /// <param name="modelName">The model name, which the issue is associated with.</param>
     public void DeleteIssue(int index, string modelName)
     {
         model.DeleteIssue(index);
         JsonUtil.Serialize(model, modelName);
     }
 
-    // Returns model.
+    /// <summary>
+    /// Model getter.
+    /// </summary>
     public Model GetModel()
     {
         return model;
     }
 
-    // Checks if the model exists in the file path.
+    /// <summary>
+    /// Checks if a model with the model name given exists in the json directory.
+    /// </summary>
+    /// <returns>True if the model exists, False if it does not exist.</returns>
     private bool ModelExists(string modelName)
     {
         string filePath = Path.Combine(Application.dataPath, "Json/" + modelName);

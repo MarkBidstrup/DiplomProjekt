@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 
+/// <summary>
+/// Stores the assigned to dropdown menu option string values.
+/// </summary>
 public static class AssignedToOptions
 {
     public static List<string> Options = new List<string> {

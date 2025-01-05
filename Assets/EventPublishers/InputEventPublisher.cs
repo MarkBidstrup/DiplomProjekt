@@ -1,24 +1,29 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.XR;
-using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
+using CommonUsages = UnityEngine.XR.CommonUsages;
+using InputDevice = UnityEngine.XR.InputDevice;
 
 
-// Checks for controller input and publishes events.
+/// <summary>
+/// EventPublisher associated with controller inputs.
+/// </summary>
 public class InputEventPublisher : MonoBehaviour
 {
     public event Action OnMenuButtonPressed;
     public event Action OnLeftPrimaryButtonPressed;
     public event Action OnRightPrimaryButtonPressed;
-    public event Action OnRightSecondaryButtonPressed;
     private InputDevice leftHandDevice;
     private InputDevice rightHandDevice;
     private bool menuButtonWasPressed = false;
     private bool leftPrimaryButtonWasPressed = false;
     private bool rightPrimaryButtonWasPressed = false;
-    private bool rightSecondaryButtonWasPressed = false;
     private bool createIssueUIOpen = false;
 
+
+    /// <summary>
+    /// Checks for controller input.
+    /// </summary>
     void Update()
     {
         // Check for left menu button press.
@@ -58,15 +63,6 @@ public class InputEventPublisher : MonoBehaviour
                 OnRightPrimaryButtonPressed.Invoke();
             }
             rightPrimaryButtonWasPressed = rightPrimaryButtonPressed;
-        }
-        bool rightSecondaryButtonPressed = false;
-        if (rightHandDevice.isValid && rightHandDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out rightSecondaryButtonPressed))
-        {
-            if (rightSecondaryButtonPressed && !rightSecondaryButtonWasPressed && !createIssueUIOpen)
-            {
-                OnRightSecondaryButtonPressed.Invoke();
-            }
-            rightSecondaryButtonWasPressed = rightSecondaryButtonPressed;
         }
     }
 }

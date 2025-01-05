@@ -3,11 +3,19 @@ using System.IO;
 using UnityEngine;
 
 
-// Utility class to serialize/deserialize objects.
+/// <summary>
+/// Utility class to serialize and deserialize object to and from JSON files.
+/// </summary>
 public static class JsonUtil
 {
     private static string FilePath { get; set; }
     
+    /// <summary>
+    /// Serializes object to a JSON file.
+    /// </summary>
+    /// <typeparam name="T">The object type.</typeparam>
+    /// <param name="obj">The object.</param>
+    /// <param name="filePath">The filepath.</param>
     public static void Serialize<T>(T obj, string filePath)
     {
         FilePath = Path.Combine(Application.dataPath, "Json/" + filePath);
@@ -27,9 +35,14 @@ public static class JsonUtil
         }
 
         File.WriteAllText(FilePath, jsonString);
-        Debug.Log("Data serialized and saved to: " + FilePath);
     }
 
+    /// <summary>
+    /// Deserializes an object from a JSON file.
+    /// </summary>
+    /// <typeparam name="T">The object type.</typeparam>
+    /// <param name="filePath">The filepath.</param>
+    /// <returns>The deserialized object.</returns>
     public static T Deserialize<T>(string filePath)
     {
         FilePath = Path.Combine(Application.dataPath, "Json/" + filePath);
